@@ -37,8 +37,8 @@ export default function ChargeMoneyScreen({ changeScreen, navigation}) {
   const chargeMoney = () => {
     return async () => {
       try {
-        const res = await axios.post(`http://${IP}:3001/movement/carga/1`);
-        const res1 = await axios.put(`http://${IP}:3001/account/recarga/2`)
+        const res = await axios.post(`/movement/carga/1`);
+        const res1 = await axios.put(`/account/recarga/2`)
         transfer();
 
         console.log(res.data);

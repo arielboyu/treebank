@@ -32,7 +32,7 @@ const getAccounts = (account) => {
 export const getOneAccount = (email) => {
 	return async (dispatch) => {
 		try {
-			const res = await axios.get(`http://${IP}:3001/account/${email}`);
+			const res = await axios.get(`/account/${email}`);
 			dispatch(getAccount(res.data));
 		} catch (err) {
 			console.log(err);
@@ -43,7 +43,7 @@ export const getOneAccount = (email) => {
 export const getAllAccounts = (email) => {
 	return async (dispatch) => {
 		try {
-			const res = await axios.get(`http://${IP}:3001/account/all/${email}`);
+			const res = await axios.get(`/account/all/${email}`);
 			dispatch(getAccounts(res.data));
 		} catch (err) {
 			console.log(err);
@@ -54,7 +54,7 @@ export const getAllAccounts = (email) => {
 export const getAllMovements = (id) => {
 	return async (dispatch) => {
 		try {
-			const res = await axios.get(`http://${IP}:3001/movement/${id}`);
+			const res = await axios.get(`/movement/${id}`);
 			dispatch(getMovements(res.data));
 		} catch (err) {
 			console.log(err);
@@ -68,7 +68,7 @@ export const changeMoney = (data) => { //type: venta o compra
 		try {
 			const res = await axios.get(`https://www.dolarsi.com/api/api.php?type=valoresprincipales`);
 			const cotizacion = res.data[0].casa[type].replace(',', '.') //Valor del cambio actual para venta o compra
-			axios.put(`http://${IP}:3001/account/cambio/${cotizacion}/${type}/${amount}/${email}`);
+			axios.put(`/account/cambio/${cotizacion}/${type}/${amount}/${email}`);
 		} catch (err) {
 			console.log(err);
 		}

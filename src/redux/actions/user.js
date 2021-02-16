@@ -55,11 +55,11 @@ const logoutUser = () => {
 export const createNewUser = (user) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`http://${IP}:3001/user`, user);
+      const res = await axios.post(`/user`, user);
       dispatch(createUser(res.data));
       if (res.data.email) {
         const email = res.data.email;
-        await axios.post(`http://${IP}:3001/email`, { email });
+        await axios.post(`/email`, { email });
       }
     } catch (err) {
       console.log(err);
@@ -70,7 +70,7 @@ export const createNewUser = (user) => {
 export const getUserByID = (id) => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(`http://${IP}:3001/user/${id}`);
+      const res = await axios.get(`/user/${id}`);
       dispatch(getUser(res.data));
     } catch (err) {
       console.log(err);
@@ -81,7 +81,7 @@ export const getUserByID = (id) => {
 export const getUsers = () => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(`http://${IP}:3001/user`);
+      const res = await axios.get(`/user`);
 
       dispatch(getAllUsers(res.data));
     } catch (err) {
@@ -95,7 +95,7 @@ export const dischargeNewUser = (updateUser) => {
   const lastName =updateUser.last_name.charAt(0).toUpperCase() + updateUser.last_name.slice(1);
   return async (dispatch) => {
     try {
-      const res = await axios.put(`http://${IP}:3001/user/alta/${updateUser.id}`, {
+      const res = await axios.put(`/user/alta/${updateUser.id}`, {
         firstName: firstName,
         lastName: lastName,
         mobile: updateUser.phone_number,
@@ -120,7 +120,7 @@ export const dischargeNewUser = (updateUser) => {
 export const createAccount = (updateUser) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`http://${IP}:3001/account/${updateUser.id}`);
+      const res = await axios.post(`/account/${updateUser.id}`);
     } catch (err) {
       console.log(err)
     };
@@ -130,7 +130,7 @@ export const createAccount = (updateUser) => {
   export const login = (user) => {
     return async (dispatch) => {
       try {
-        const res = await axios.post(`http://${IP}:3001/auth/login`, user);
+        const res = await axios.post(`/auth/login`, user);
         dispatch(logUser(res.data))
       } catch (err) {
         console.log(err);
