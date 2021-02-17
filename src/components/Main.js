@@ -6,6 +6,7 @@ import ChangeMoney from '../../screens/ChangeMoneyScreen';
 import MainScreen from '../../screens/MainScreen';
 import ContactsScreen from '../../screens/Contacts';
 import UserDataScreen from '../../screens/userDataScreen'
+import SettingsScreen from '../../screens/settingsScreen'
 const Main = () => {
     const [screen, setScreen] = useState("main")
 
@@ -42,6 +43,11 @@ const Main = () => {
             }
             {
                 screen === "misdatos" && <UserDataScreen
+                    changeScreen={changeScreen}
+                />
+            }
+            {
+                screen === "config" && <SettingsScreen
                     changeScreen={changeScreen}
                 />
             }

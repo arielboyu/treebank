@@ -14,7 +14,7 @@ export default function CardsScreen({changeScreen}) {
 		name="arrow-left"
 		size={25}
 		color="black"
-		backgroundColor="#FFFF"
+		backgroundColor="transparent"
 		onPress={() => changeScreen('prod')}
 		/>
     <Headline>Mis tarjetas</Headline>
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
  		padding: 20,
- 		backgroundColor: "#FFFF"
+
   	},
 logo: {
    alignItems:'center',

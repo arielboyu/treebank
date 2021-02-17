@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, ImageBackground } from 'react-native';
-import { Button, Drawer, DataTable } from 'react-native-paper';
+import { View, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
+import { Button, Drawer, Text, DataTable } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 //import PureChart from 'react-native-pure-chart';
 import Svg from 'react-native-svg';
@@ -57,7 +57,7 @@ const StatisticsScreen = () => {
 	return (
 		<View style={styles.container}>
 			<Header title="Mis Estadisticas..." />
-			
+
 				<View style={styles.chart}>
 					<Svg>
 						<VictoryPie
@@ -108,7 +108,7 @@ const StatisticsScreen = () => {
 						/>
 					</Svg>
 				</View>
-			
+
 			<View style={styles.generalCont1}>
 				<TouchableOpacity style={styles.cardContainer}>
 					<View style={styles.section1}>
@@ -213,14 +213,14 @@ const styles = StyleSheet.create({
 	container     : {
 		flex            : 1,
 		padding         : 20,
-		backgroundColor : '#FFFF'
+
 	},
 	chart         : {
 		height     : HEIGHT,
 		width      : WIDTH,
 		alignItems : 'center',
 		marginTop  : 10,
-		marginLeft: "13%"
+		marginLeft: "6%"
 
 	},
 	cardContainer : {
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
 		shadowRadius: 7.49,
 
 		elevation: 2,
-		
+
 	},
 	generalCont1  : {
 		display        : 'flex',
@@ -268,8 +268,8 @@ const styles = StyleSheet.create({
 		padding         : 5,
 		backgroundColor : 'rgba(93, 177, 31,0.1)',
 		marginRight     : 5,
-		
-		
+
+
 	},
 	section3      : {
 		width : '60%'

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, ImageBackground,Headline, TouchableOpacity, Platform,Divider } from 'react-native';
+import { View, StyleSheet, Image, ImageBackground,Headline, TouchableOpacity, Platform,Divider } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Feather from 'react-native-vector-icons/Feather';
 import { Picker } from '@react-native-picker/picker';
@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import logo from '../assets/LogoVector.png';
 import { createAccount, dischargeNewUser, getUsers } from '../src/redux/actions/user';
-import { TextInput, Button } from 'react-native-paper';
+import { TextInput, Button,Text } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -47,7 +47,7 @@ export default function userDataScreen({changeScreen}) {
 		name="arrow-left"
 		size={25}
 		color="black"
-		backgroundColor="#FFFF"
+		backgroundColor="transparent"
 		onPress={() => changeScreen('main')}
 		/>
 		<Text style={{fontSize:20}} >	<Entypo
@@ -122,7 +122,6 @@ export default function userDataScreen({changeScreen}) {
 const styles = StyleSheet.create({
 	container    : {
 		flex            : 1,
-		backgroundColor : '#FFFF'
 	},
 
 	imageaction  : {

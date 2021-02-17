@@ -12,7 +12,7 @@ const Header = (props) => {
     const { changeScreen, menu, title } = props;
 
     const [visible, setVisible] = useState(false)
-  
+
     useEffect(() => {
 		dispatch(getUserByID(user.user.id.id));
 	}, [])
@@ -21,16 +21,13 @@ const Header = (props) => {
 
     return(
         <>
-           
-
-
             <View style={styles.greeting}>
                 {
                     menu && <Icon.Button
-                        name="bars" 
+                        name="bars"
                         size={25}
                         color="black"
-                        backgroundColor="#FFFF"
+                        backgroundColor="transparent"
                         onPress={() => setVisible(true)}
                     />
                 }
@@ -54,7 +51,7 @@ const Header = (props) => {
                         <View style={[styles.menu]}>
                             <Menu.Item icon="account" onPress={() => {changeScreen('misdatos')}} title="Mis datos" style={{width: '100%'}}/>
                             <Menu.Item icon="contacts" onPress={() => {changeScreen('contacts')}} title="Mis contactos" style={{width: '100%'}}/>
-                            <Menu.Item icon="cog" onPress={() => {}} title="Configuración" style={{width: '100%'}}/>
+                            <Menu.Item icon="cog" onPress={() => {changeScreen('config')}} title="Configuración" style={{width: '100%'}}/>
                             <Menu.Item icon="help" onPress={() => {}} title="Ayuda" style={{width: '100%'}}/>
                         </View>
                     </View>
@@ -71,11 +68,11 @@ const Header = (props) => {
 
 const styles = StyleSheet.create({
 	sideBar: {
-		backgroundColor: '#FFFF',
+		backgroundColor : 'rgba(93, 177, 31,0.9)',
 		width: '60%',
 		height: '100%',
-        display: 'flex',
-        justifyContent: 'flex-start'
+    display: 'flex',
+    justifyContent: 'flex-start',
     },
     greeting: {
 		display: "flex",

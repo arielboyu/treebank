@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { FlatList, ImageBackground, StyleSheet,  View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, RadioButton, Headline, Paragraph, Portal, Dialog, Divider, ActivityIndicator } from 'react-native-paper';
+import { Button, RadioButton, Headline, Paragraph, Portal, Dialog,Text, Divider, ActivityIndicator } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
@@ -17,7 +17,7 @@ const MainScreen = ({changeScreen}) => {
 		dispatch(getUserByID(user.user.id.id));
 		dispatch(getAllAccounts(user.user.id.email));
     getStoredUser();
-	}, []); 
+	}, []);
 
 	//Card seleccionada (pesos o dolares)
 	const [selectedCard, setSelectedCard] = useState('Pesos');
@@ -47,15 +47,15 @@ const MainScreen = ({changeScreen}) => {
 	}, []);
 
    // Trae el usuario guardado en asyncStorage, en forma de objeto.
-   	const getStoredUser = async () => {  
+   	const getStoredUser = async () => {
 		try {
 			const jsonData = await AsyncStorage.getItem('USER')
 			return jsonData != null ? JSON.parse(jsonData) : null;
-		
+
 		} catch(e) {
 			// error reading value
 		}
-  	} 
+  	}
 
 	const { firstName, lastName, movements } = user.loggedUser;
 
@@ -92,32 +92,32 @@ const MainScreen = ({changeScreen}) => {
 			parsedMovements.push(data)
 		})
 
-		
+
 
 		const startDate = moment().subtract(time, unit).format(format)
 
 		const resultData = parsedMovements.filter(movement => {
 			return moment(movement.date, "DD/MM/YYYY").format('YYYY/MM/DD') >= moment(startDate, "DD/MM/YYYY").format('YYYY/MM/DD');
 		});
-		
+
 		const pesosIn = resultData.filter(movement => {
 			return movement.currency === 'pesos' && movement.type === 'recibo'
 		}).reduce((acc, value) => {
 				return acc + value.amount
 		}, 0)
-		
+
 		const pesosOut = resultData.filter(movement => {
 			return movement.currency === 'pesos' && movement.type === 'envio'
 		}).reduce((acc, value) => {
 				return acc + value.amount
 		}, 0)
-		
+
 		const DollarsIn = resultData.filter(movement => {
 			return movement.currency === 'dolares' && movement.type === 'recibo'
 		}).reduce((acc, value) => {
 				return acc + value.amount
 		}, 0)
-		
+
 		const DollarsOut = resultData.filter(movement => {
 			return movement.currency === 'dolares' && movement.type === 'envio'
 		}).reduce((acc, value) => {
@@ -169,7 +169,7 @@ const MainScreen = ({changeScreen}) => {
 				</View>
 				: <>
 					<View style={styles.balance}>
-						<Header 
+						<Header
 							title={`Hola, ${firstName}...`}
 							changeScreen={changeScreen}
 							menu={true}
@@ -195,7 +195,7 @@ const MainScreen = ({changeScreen}) => {
 							<Headline>General...</Headline>
 							<Text style={{marginRight: 10}}>{selectedCard}</Text>
 						</View>
-				
+
 						<View style={styles.generalCont1}>
 
 							<View style={styles.generalSection}>
@@ -228,7 +228,7 @@ const MainScreen = ({changeScreen}) => {
 					<Divider/>
 
 					<View style={[styles.generalCont1, {justifyContent: 'center'}]}>
-						<Button 
+						<Button
 							mode="text"
 							onPress={() => setPeriodShows(true)}
 						>
@@ -344,7 +344,7 @@ const MainScreen = ({changeScreen}) => {
 								</Dialog.Content>
 								<Dialog.Actions>
 									<Button onPress={(e) => {
-										
+
 										setPeriodShows(false)
 									}}>
 										Seleccionar
@@ -360,7 +360,7 @@ const MainScreen = ({changeScreen}) => {
 
 					<View style={styles.generalCont2}>
 						<View style={styles.center}>
-							<Button 
+							<Button
 								style={styles.iconButtons}
 								onPress={() => changeScreen('charge')}
 							>
@@ -369,7 +369,7 @@ const MainScreen = ({changeScreen}) => {
 							<Paragraph style={styles.buttonDesc}>Cargar</Paragraph>
 						</View>
 						<View style={styles.center}>
-							<Button 
+							<Button
 								style={styles.iconButtons}
 								onPress={() => changeScreen('change')}
 							>
@@ -378,7 +378,7 @@ const MainScreen = ({changeScreen}) => {
 							<Paragraph style={styles.buttonDesc}>Cambiar</Paragraph>
 						</View>
 						<View style={styles.center}>
-							<Button 
+							<Button
 								style={styles.iconButtons}
 								onPress={() => changeScreen('send')}
 							>
@@ -393,11 +393,18 @@ const MainScreen = ({changeScreen}) => {
 	);
 };
 
+
+/*!firstName
+	? <View style={{flex: 1, justifyContent: 'center'}}>
+		<ActivityIndicator size="large" color="#5DB12F"/>
+	</View>
+	:  */
+
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
  		padding: 20,
- 		backgroundColor: "#FFFF"
+
   	},
  	mainCard: {
  		width: 320,
@@ -516,7 +523,7 @@ const styles = StyleSheet.create({
 		color: "white",
 		fontWeight: "300",
 		fontSize: 20
-	}, 
+	},
 	selectorsCont: {
 		display: 'flex',
 		flexDirection: 'row',

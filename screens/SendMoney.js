@@ -20,7 +20,7 @@ export default function SendMoney({ changeScreen, navigation }) {
 
   const [data, setData] = useState({
     form: {
-     
+
       contactId: '',
       description: '',
       currency: '',
@@ -42,15 +42,15 @@ export default function SendMoney({ changeScreen, navigation }) {
   //console.log('Data', data);
 
   const handleSendMoney =  async () => {
-   
+
   console.log("DATA 2 >>>", data.form)
       return  await axios.post(`/movement/transferencia/${userId}`, data.form )
-      .then(  await axios.put(`/account/${userId}`, data.form ).catch((err) => alert(`No posee los fondos suficientes`)))    
-      .then( changeScreen('main'))          
-      
-           
+      .then(  await axios.put(`/account/${userId}`, data.form ).catch((err) => alert(`No posee los fondos suficientes`)))
+      .then( changeScreen('main'))
+
+
     };
-	
+
 
 
 
@@ -61,7 +61,7 @@ export default function SendMoney({ changeScreen, navigation }) {
           name="arrow-left"
           size={25}
           color="black"
-          backgroundColor="#FFFF"
+          backgroundColor="transparent"
           onPress={() => changeScreen('main')}
         />
         <Headline>Enviar Dinero</Headline>
@@ -83,7 +83,7 @@ export default function SendMoney({ changeScreen, navigation }) {
           onValueChange={(val) => (setContactState(val), handleChange({ value: val, type:'contactId' }))}
         >
           <Picker.Item label="seleccione contacto.." />
-         
+
           <Picker.Item label={contacts[0].alias} value={contacts[0].contactId} />
           <Picker.Item label={contacts[1].alias} value={contacts[1].contactId} />
           <Picker.Item label={contacts[2].alias} value={contacts[2].contactId} />
@@ -107,6 +107,17 @@ export default function SendMoney({ changeScreen, navigation }) {
           placeholder="Detalle de envio"
           autoCapitalize="none"
           onChangeText={(val) => handleChange({ value: val, type: 'description' })}
+          style={{
+            height: 48,
+            paddingLeft: 5,
+            width: 180,
+          }}
+        />
+      </View>
+      <View style={styles.action}>
+        <TextInput
+          placeholder="Ingrese Cvu"
+          autoCapitalize="none"
           style={{
             height: 48,
             paddingLeft: 5,
@@ -176,7 +187,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: "#FFFF"
+
   },
   action: {
     flexDirection: 'row',
@@ -196,7 +207,7 @@ const styles = StyleSheet.create({
   },
   boton: {
     alignItems: 'center',
-    marginTop: 15,
+    marginTop: 60,
     marginLeft: 20
   },
   iconButtons: {

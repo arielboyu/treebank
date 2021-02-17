@@ -3,7 +3,6 @@ import {
 	ImageBackground,
 	Image,
 	StyleSheet,
-	Text,
 	View,
 	Modal,
 	ActivityIndicator,
@@ -11,7 +10,7 @@ import {
 	Alert,
 	ScrollView
 } from 'react-native';
-import { Button, Divider, Headline, Paragraph } from 'react-native-paper';
+import { Button, Divider, Headline, Paragraph,Text } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -21,7 +20,7 @@ import axios from 'axios';
 import IP from '../src/redux/actions/ip';
 
 export default function ChargeMoneyScreen({ changeScreen, navigation}) {
-	
+
 	const userAccount = '88333 44526';
 
 	const dispatch = useDispatch();
@@ -55,12 +54,12 @@ export default function ChargeMoneyScreen({ changeScreen, navigation}) {
 	const [ account, setAccount ] = useState(userAccount);
 
 	const transfer = () => {
-    
+
 		setVisible(true);
 		setVisibleButton(false);
 		setMovement('Procesando Recarga....');
 		setTimeout(() => {
-      
+
 			setMovement('Recarga Exitosa');
 			setAnimation(false);
 			setVisibleButton(true);
@@ -78,7 +77,7 @@ export default function ChargeMoneyScreen({ changeScreen, navigation}) {
 					name="arrow-left"
 					size={25}
 					color="black"
-					backgroundColor="#FFFF"
+					backgroundColor="transparent"
 					onPress={() => changeScreen('main')}
 				/>
 				<Headline>Cargar Dinero</Headline>
@@ -173,7 +172,7 @@ const styles = StyleSheet.create({
 	container    : {
 		flex            : 1,
 		padding         : 20,
-		backgroundColor : '#FFFF'
+
 	},
 	logo         : {
 		alignItems : 'center',

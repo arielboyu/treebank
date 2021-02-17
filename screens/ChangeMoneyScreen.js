@@ -50,8 +50,8 @@ export default function ChangeMoney ({changeScreen}) {
 	return (
         <View style={styles.container}>
             <Portal>
-                <Dialog 
-                    visible={visible2} 
+                <Dialog
+                    visible={visible2}
                     onDismiss={() => {setVisible2(false)}}
                 >
                     <Dialog.Content>
@@ -97,11 +97,11 @@ export default function ChangeMoney ({changeScreen}) {
                     Se ha realizado el cambio de moneda
             </Snackbar>
             <View style={styles.heading}>
-                <Icon.Button 
-                    name="arrow-left" 
+                <Icon.Button
+                    name="arrow-left"
                     size={25}
                     color="black"
-                    backgroundColor="#FFFF"
+                    backgroundColor="transparent"
                     onPress={() => changeScreen('main')}
                 />
                 <Headline>Cambiar Dinero</Headline>
@@ -116,7 +116,7 @@ export default function ChangeMoney ({changeScreen}) {
             <TextInput
                 label="Monto a cambiar"
                 placeholder={`Ingrese monto en ${selected === 0 ? "Pesos" : "Dolares"}`}
-                keyboardType="numeric" 
+                keyboardType="numeric"
                 mode="outlined"
                 //value={amount}
                 onChangeText={(text) => {setAmount(text)}}
@@ -131,14 +131,14 @@ export default function ChangeMoney ({changeScreen}) {
             />
         </View>
         <View style={styles.boton}>
-            <Button 
+            <Button
                 style={styles.iconButtons}
                 onPress={onSubmit}
             >
-                <Icon 
-                    name="exchange-alt" 
-                    size={30} 
-                    color="#fff" 
+                <Icon
+                    name="exchange-alt"
+                    size={30}
+                    color="#fff"
                 />
             </Button>
             <Paragraph style={{fontWeight: '700'}}>
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
  		padding: 20,
- 		backgroundColor: "#FFFF"
+
   	},
     logo: {
         alignItems:'center',

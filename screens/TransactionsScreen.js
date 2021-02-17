@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Portal, Modal, Headline, Divider, Paragraph, Subheading, Title } from 'react-native-paper';
+import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Portal,Text, Modal, Headline, Divider, Paragraph, Subheading, Title } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../src/components/Header';
@@ -24,9 +24,9 @@ const TransactionsScreen = () => {
 		<View style={styles.container}>
 			<Header title="Mis transacciones..."/>
       <Portal>
-        <Modal 
-          visible={visible} 
-          onDismiss={() => setVisible(false)} 
+        <Modal
+          visible={visible}
+          onDismiss={() => setVisible(false)}
           contentContainerStyle={styles.containerStyle}
           style={{display: 'flex', alignItems: 'center'}}
         >
@@ -59,27 +59,27 @@ const TransactionsScreen = () => {
             {/* Detalles de la transaccion */}
             {
               movements.map((transaction, i) => (
-                <View 
-                  style={styles.generalCont1} 
-                  key={i}  
+                <View
+                  style={styles.generalCont1}
+                  key={i}
                 >
-                  <TouchableOpacity 
-                    style={styles.cardContainer} 
+                  <TouchableOpacity
+                    style={styles.cardContainer}
                     onPress={() => {
                       setVisible(true)
                       setSelected(i)
                     }}
                   >
                     <View style={styles.section1}>
-                      <Icon 
+                      <Icon
                         name={
                           transaction.movementType === "Compra" ? "shopping-cart" :
                           transaction.movementType === "Transferencia" ? "exchange-alt" :
                           transaction.movementType === "Pago" ? "dollar-sign" :
                           transaction.movementType === "Carga" ? "donate" : null
-                        } 
-                        size={30} 
-                        color="#F7F7F9" 
+                        }
+                        size={30}
+                        color="#F7F7F9"
                       />
                     </View>
                     <View style={styles.section2}>
@@ -92,8 +92,8 @@ const TransactionsScreen = () => {
                       </View>
                       <View style={styles.section4}>
                         <Text style={
-                          transaction.type === "recibo" 
-                          ? styles.blueNumbers 
+                          transaction.type === "recibo"
+                          ? styles.blueNumbers
                           : styles.redNumbers}
                         >
                           {`${transaction.type === "recibo" ? "+" : "-"}${transaction.currency === "pesos" ? "$" : "US$"} ${transaction.amount}`}
@@ -106,7 +106,7 @@ const TransactionsScreen = () => {
             }
           </ScrollView>
         : <Text>Aun no tienes transacciones</Text>
-      }	
+      }
 		</View>
 	);
 };
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
  		padding: 20,
- 		backgroundColor: "#FFFF"
+
   },
   header: {
 		display: "flex",
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   containerStyle: {
-    backgroundColor: 'white', 
+    backgroundColor: 'white',
     padding: 20,
     width: '85%',
     height: '50%',
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
     margin: 10
   },
   title: {
-    fontWeight: "600", 
+    fontWeight: "600",
     color: '#097934'
   }
 });

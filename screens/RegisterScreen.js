@@ -200,7 +200,7 @@ export default function Register({navigation}) {
   container: {
   	backgroundColor:'#FFF',
   	height:'100%',
-	paddingTop: 30
+	  paddingTop: 30
   },
   boton: {
   	alignItems: 'center',

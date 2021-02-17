@@ -280,7 +280,6 @@ export default function Login({ navigation }) {
 		 </Button>
 		 </View>
 		 </View>
-		 { !storageUser ? null :
 			 <Button
 			 mode="contained"
 			 onPress={
@@ -297,7 +296,6 @@ export default function Login({ navigation }) {
 			 }}>
 			 Usar Huella
 			 </Button>
-		 }
 	 </View>
 	</View>
 	);

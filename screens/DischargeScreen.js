@@ -150,8 +150,8 @@ export default function dischargeScreen({ navigation, user }) {
 	return (
 		<View style={styles.container}>
 		<ImageBackground
-			 style={{width:400,
-			 height: 400,
+			 style={{width:380,
+			 height: 380,
 			 opacity:0.9,
 			 marginTop:'40%'
 			 }}
@@ -363,7 +363,7 @@ const styles = StyleSheet.create({
 	guardar      : {
 		marginLeft        : 10,
 		paddingHorizontal : 120,
-		marginTop:'15%'
+		marginTop:'2%'
 	},
 
 	form         : {
