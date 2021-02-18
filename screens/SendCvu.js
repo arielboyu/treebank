@@ -47,7 +47,7 @@ export default function SendCvu({ changeScreen, navigation }) {
 
     console.log("DATA 2 >>>", data.form)
         return  await axios.post(`https://intermoba.herokuapp.com/`, data.form )
-        .then(  await axios.put(`/account/envio/1`, data.form.amount )
+        .then(  await axios.put(`/account/envio/1`, data.form)
         .catch((err) => alert(`No posee los fondos suficientes`)))
         .then( navigation.navigate('Inicio'))
       };
@@ -78,7 +78,7 @@ export default function SendCvu({ changeScreen, navigation }) {
       <View style={styles.action}>
         <TextInput
           placeholder="Ingrese Cvu"
-          onChangeText={(val) => handleChange({ value: val, type: 'cvu_reciever' })}
+          onChangeText={(val) => handleChange({ value: val, type: 'cvu_receiver' })}
           autoCapitalize="none"
           style={{
             height: 48,
