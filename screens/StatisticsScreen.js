@@ -277,12 +277,12 @@ const styles = StyleSheet.create({
 	section4      : {
 		display    : 'flex',
 		alignItems : 'flex-end',
-		width      : '40%'
+		width      : '30%'
 	},
 	text          : {
 		color      : 'black',
 		fontWeight : '400',
-		fontSize   : 18
+		fontSize   : 18,
 	},
 	lightGreen    : {
 		backgroundColor : '#5DB11F'

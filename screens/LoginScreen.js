@@ -10,6 +10,8 @@ import { Divider, Headline, Paragraph, TextInput, Button } from 'react-native-pa
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DropdownAlert from 'react-native-dropdownalert';
 import * as LocalAuthentication from 'expo-local-authentication'
+import Entypo from 'react-native-vector-icons/Entypo';
+
 
 export default function Login({ navigation }) {
 	const dispatch = useDispatch();
@@ -276,7 +278,7 @@ export default function Login({ navigation }) {
 		 style={{
 		 backgroundColor : '#006A34',
 		 }}>
-		 INICIAR SESIóN
+		 INGRESAR
 		 </Button>
 		 </View>
 		 </View>
@@ -288,13 +290,17 @@ export default function Login({ navigation }) {
             : showIncompatibleAlert
         }
 			 style={{
-				 borderRadius:5,
+				 borderRadius:9,
 				 marginTop: 25,
-				 marginLeft:'32%',
-				 width: 150,
-			 backgroundColor : '#006A34',
+				 marginLeft:'38%',
+				 width: 106,
+			   backgroundColor : '#006A34',
 			 }}>
-			 Usar Huella
+			 <Entypo
+			 name="fingerprint"
+			 color="white"
+			 size={30}
+			 />
 			 </Button>
 	 </View>
 	</View>
