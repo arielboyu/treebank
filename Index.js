@@ -38,7 +38,7 @@ import { cos } from 'react-native-reanimated';
 import CvuScreen from './screens/CvuScreen'
 import CardsScreen from './screens/CardsScreen'
 import FingerPrint from './screens/FingerPrintScreen';
-
+import SendCvuScreen from './screens/CvuScreen'
 
 LogBox.ignoreAllLogs(true)
 
@@ -166,6 +166,22 @@ const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
                 <Tab.Screen
                     name="Productos"
                     component={ProductsScreen}
+
+                    options={{
+                    tabBarIcon: ({ color }) => (
+                        <Icon
+                        name="wallet"
+                        color={color}
+                        size={23}
+                        />
+                    ),
+                    tabBarColor: "#279152"
+                    }}
+
+                />
+                <Tab.Screen
+                    name="SendCvu"
+                    component={SendCvuScreen}
 
                     options={{
                     tabBarIcon: ({ color }) => (
