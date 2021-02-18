@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, ImageBackground, StyleSheet,  View } from 'react-native';
+import { Dimensions, FlatList, ImageBackground, ScrollView, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, RadioButton, Headline, Paragraph, Portal, Dialog,Text, Divider, ActivityIndicator } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -13,10 +13,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //Mi posición consolidada
 const MainScreen = ({changeScreen}) => {
 	const dispatch = useDispatch();
-  useEffect(() => {
+
+  	useEffect(() => {
 		dispatch(getUserByID(user.user.id.id));
 		dispatch(getAllAccounts(user.user.id.email));
-    getStoredUser();
+    	getStoredUser();
 	}, []);
 
 	//Card seleccionada (pesos o dolares)
@@ -40,6 +41,9 @@ const MainScreen = ({changeScreen}) => {
 	const user = useSelector(state => state.user);
 	const account = useSelector(state => state.account.userAccounts)
 
+	const windowWidth = Dimensions.get('window').width;
+	const windowHeight = Dimensions.get('window').height;
+
   useEffect(() => {
 		dispatch(getUserByID(user.user.id.id));
 		dispatch(getAllAccounts(user.user.id.email));
@@ -56,6 +60,13 @@ const MainScreen = ({changeScreen}) => {
 			// error reading value
 		}
   	}
+
+	console.log(windowHeight, windowWidth)
+
+	const smallHeight = windowHeight < 670;
+	const smallWidth = windowWidth < 380;
+	const smallWidth2 = windowWidth < 355;
+
 
 	const { firstName, lastName, movements } = user.loggedUser;
 
@@ -141,11 +152,11 @@ const MainScreen = ({changeScreen}) => {
 		<View>
 			<ImageBackground
 				source={index === 0 ? require(`../assets/backgroundCard1.jpeg`) : require(`../assets/backgroundCard2.jpeg`)}
-				style={styles.mainCard}
+				style={smallWidth2 ? styles.superSmallMainCard : smallWidth ? styles.smallMainCard : styles.mainCard}
 				imageStyle={{ borderRadius: 15 }}>
 				<View>
 					<Paragraph>Balance actual</Paragraph>
-					<Text style={styles.bigText}>
+					<Text style={smallWidth ? styles.smallBigText : styles.bigText}>
 						{`${item.tipo === 'dolares' ? 'US$' : '$'}${item.balance}`}
 					</Text>
 				</View>
@@ -154,7 +165,10 @@ const MainScreen = ({changeScreen}) => {
 						{`${firstName} ${lastName}`}
 					</Paragraph>
 					<Paragraph style={styles.cardText}>
-						{`******************${item.tipo === 'dolares' ? item.cvuUS.slice(item.cvuUS.length - 4, item.cvuUS.length) : item.cvu.slice(item.cvu.length - 4, item.cvu.length)} | ${item.tipo.charAt(0).toUpperCase() + item.tipo.slice(1)}`}
+						{smallWidth 
+							? `******************${item.tipo === 'dolares' ? item.cvuUS.slice(item.cvuUS.length - 4, item.cvuUS.length) : item.cvu.slice(item.cvu.length - 4, item.cvu.length)}\n${smallWidth2 ? "" : item.tipo.charAt(0).toUpperCase() + item.tipo.slice(1)}` 
+							: `******************${item.tipo === 'dolares' ? item.cvuUS.slice(item.cvuUS.length - 4, item.cvuUS.length) : item.cvu.slice(item.cvu.length - 4, item.cvu.length)} | ${item.tipo.charAt(0).toUpperCase() + item.tipo.slice(1)}`
+						}
 					</Paragraph>
 				</View>
 			</ImageBackground>
@@ -184,21 +198,25 @@ const MainScreen = ({changeScreen}) => {
 							extraData={user.loggedUser}
 							renderItem={card}
 							showsHorizontalScrollIndicator={false}
-							style={styles.scroll}
+							style={smallHeight ? styles.smallScroll : styles.scroll}
 						/>
 					</View>
 
 					{/* General */}
-
+					<ScrollView>
 					<View style={styles.general}>
-						<View style={[styles.generalCont1, {justifyContent: 'space-between', alignItems: 'center'}]}>
-							<Headline>General...</Headline>
-							<Text style={{marginRight: 10}}>{selectedCard}</Text>
-						</View>
+						
+						{
+							!smallHeight && 
+								<View style={[styles.generalCont1, {justifyContent: 'space-between', alignItems: 'center'}]}>
+									<Headline>General...</Headline>
+									<Text style={{marginRight: 10}}>{selectedCard}</Text>
+								</View>
+						}
 
-						<View style={styles.generalCont1}>
+						<View style={smallWidth2 ? styles.smallGeneralCont1 : styles.generalCont1}>
 
-							<View style={styles.generalSection}>
+							<View style={smallWidth2 ? styles.smallGeneralSection : styles.generalSection}>
 								<View style={styles.cardCont}>
 									<View style={styles.generalSection1}>
 										<Icon name="plus" size={30} color="#F7F7F9" />
@@ -210,7 +228,7 @@ const MainScreen = ({changeScreen}) => {
 								</View>
 							</View>
 
-							<View style={styles.generalSection}>
+							<View style={smallWidth2 ? styles.smallGeneralSection : styles.generalSection}>
 								<View style={styles.cardCont}>
 									<View style={styles.generalSection1}>
 										<Icon name="minus" size={30} color="#F7F7F9" />
@@ -387,6 +405,7 @@ const MainScreen = ({changeScreen}) => {
 							<Paragraph style={styles.buttonDesc}>Enviar</Paragraph>
 						</View>
 					</View>
+					</ScrollView>
 				</>
 			}
 		</View>
@@ -415,9 +434,34 @@ const styles = StyleSheet.create({
  		marginBottom: 10,
  		marginRight: 10
   	},
+	smallMainCard: {
+		width: 290,
+		height: 181,
+		padding: 10,
+		borderRadius: 18,
+		marginTop: 5,
+		marginBottom: 5,
+		marginRight: 5
+	 },
+	 superSmallMainCard: {
+		width: 261,
+		height: 163,
+		padding: 10,
+		borderRadius: 15,
+		marginTop: 5,
+		marginBottom: 5,
+		marginRight: 5
+	 },
   	white: {
  		color: "white"
   	},
+	smallGeneralCont1: {
+		display: "flex",
+		justifyContent: "space-between",
+		width: "100%",
+		marginTop: 2,
+		marginBottom: 2,
+   },
   	generalCont1: {
  		display: "flex",
  		flexDirection: "row",
@@ -441,6 +485,10 @@ const styles = StyleSheet.create({
   	},
   	scroll: {
 		height: 220,
+		width: '100%'
+  	},
+	smallScroll: {
+		height: 190,
 		width: '100%'
   	},
   	general: {
@@ -476,6 +524,15 @@ const styles = StyleSheet.create({
 		fontWeight: '400',
 		letterSpacing: 2
 	},
+	smallBigText: {
+		fontSize: 30,
+		paddingTop: 10,
+		marginLeft: 15,
+		marginBottom: 5,
+		color: '#F7F7F9',
+		fontWeight: '400',
+		letterSpacing: 2
+	},
 	iconButtons: {
 		backgroundColor: '#097934',
 		marginBottom: 12,
@@ -501,6 +558,11 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		alignItems: 'center',
 		width: '48%',
+	},
+	smallGeneralSection: {
+		display: 'flex',
+		alignItems: 'center',
+		width: '100%',
 	},
 	generalSection1: {
 		width: '25%',
