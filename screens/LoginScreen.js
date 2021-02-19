@@ -187,10 +187,10 @@ export default function Login({ navigation }) {
 	return (
 		<View style={styles.container}>
 		<View style={styles.logo}>
-    {/* <DropdownAlert
-        ref={ref => (dropdown = ref)}
-        closeInterval={5000}
-      /> */}
+		<DropdownAlert
+			ref={ref => (dropdown = ref)}
+			closeInterval={5000}
+		/>
 		<ImageBackground style={{ width: 140, height: 140 }}
 		source={require('../assets/LogoVector.png')} />
 		</View>
