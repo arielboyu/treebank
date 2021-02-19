@@ -53,7 +53,9 @@ export default function SendCvu({ changeScreen, navigation, selected, updateSele
         .then( navigation.navigate('Inicio'))
       };
 
-{/*cvu:  2222226194980634363704  */}
+{/* camio de input cvu:  2222226194980634363704  */}
+
+
 
 
 
