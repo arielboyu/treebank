@@ -107,7 +107,7 @@ export default function CvuScreen({changeScreen}) {
                         color:'white',
                         fontSize:24
                         }}>
-                          Cuenta en pesos
+                          Cuenta en dólares
                       </Text>
                     </View>
                   <View>
@@ -120,7 +120,7 @@ export default function CvuScreen({changeScreen}) {
                       backgroundColor: '#006A34',
                       borderRadius: 12,
                       opacity:0.8,
-                      }}>{` ${cvu}`}</Text>
+                      }}>{` ${cvuUS}`}</Text>
                   </View>
                   <View style={styles.row}>
                       <Paragraph style={styles.cardText}>{`${firstName} ${lastName}`}</Paragraph>
