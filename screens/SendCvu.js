@@ -76,7 +76,7 @@ export default function SendCvu({ changeScreen, navigation, selected, updateSele
         >
         </ImageBackground>
       </View>
-      <View style={styles.center}> 
+      <View style={styles.center}>
       <View style={styles.action}>
         <ButtonGroup
           onPress={updateSelected}
@@ -102,7 +102,6 @@ export default function SendCvu({ changeScreen, navigation, selected, updateSele
         <TextInput
           label="Monto"
           autoCapitalize="none"
-          keyboardType="decimal-pad"
           onChangeText={(val) => handleChange({ value: val, type: 'amount' })}
           mode="outlined"
           style={{
@@ -120,7 +119,7 @@ export default function SendCvu({ changeScreen, navigation, selected, updateSele
         />
         <Text>Acepto usar la sección amigos con fines personales {isSelected ? "👍" : "👎"}</Text>
       </View>
-      
+
       <View
         style={{
           marginTop: 60
