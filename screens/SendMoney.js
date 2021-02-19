@@ -4,6 +4,7 @@ import { Divider, Headline, Paragraph,TextInput, Button, } from 'react-native-pa
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import logo from '../assets/logo.png'
+import { ButtonGroup } from 'react-native-elements'
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Picker } from '@react-native-picker/picker';
 import { useSelector } from 'react-redux';
@@ -11,12 +12,13 @@ import axios from 'axios';
 import IP from '../src/redux/actions/ip';
 
 
-export default function SendMoney({ changeScreen, navigation }) {
+export default function SendMoney({ changeScreen, selected, updateSelected }) {
   const [isSelected, setSelection] = useState(false);
   const contacts = useSelector(state => state.user.loggedUser.contacts)
   const userId = useSelector(state => state.user.loggedUser.id)
 
   const [contactState, setContactState] =useState(false);
+  
 
   const [data, setData] = useState({
     form: {
@@ -51,9 +53,6 @@ export default function SendMoney({ changeScreen, navigation }) {
 
     };
 
-
-
-
   return (
     <View style={styles.container}>
       <View style={styles.heading}>
@@ -64,25 +63,41 @@ export default function SendMoney({ changeScreen, navigation }) {
           backgroundColor="transparent"
           onPress={() => changeScreen('main')}
         />
-        <Headline>Enviar Dinero</Headline>
+        <Headline>Enviar dinero...</Headline>
       </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.logo}>
         <ImageBackground
-          style={{ width: 60, height: 60 }}
+          style={{ width: 140, height: 140}}
           source={require('../assets/LogoVector.png')}
-        >
-        </ImageBackground>
+        />
       </View>
+      <View style={styles.center}>
+      <View style={styles.action}>
+        <ButtonGroup
+          onPress={updateSelected}
+          selectedIndex={selected}
+          buttons={["Cliente TreeBank", "Otros bancos"]}
+          containerStyle={{height: 40, width: 222}}
+          selectedButtonStyle={{backgroundColor: '#006A34'}}
+        />
+      </View>
+
       <View style={styles.action}>
         <Picker
           style={{
-            color: 'black',
-            width: 200,
+            color: '#9C9C9C',
+            width: 222,
+            height: 40,
+            fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
+            fontSize: 16,
+            borderColor: '#9C9C9C',
+            paddingLeft: 14
           }}
           selectedValue={contactState}
           onValueChange={(val) => (setContactState(val), handleChange({ value: val, type:'contactId' }))}
         >
-          <Picker.Item label="seleccione contacto.." />
+          <Picker.Item label="Seleccione un contacto..." />
 
           <Picker.Item label={contacts[0].alias} value={contacts[0].contactId} />
           <Picker.Item label={contacts[1].alias} value={contacts[1].contactId} />
@@ -104,81 +119,83 @@ export default function SendMoney({ changeScreen, navigation }) {
       </View>
       <View style={styles.action}>
         <TextInput
-          placeholder="Detalle de envio"
+          label="Detalle de envío"
           autoCapitalize="none"
+          mode="outlined"
           onChangeText={(val) => handleChange({ value: val, type: 'description' })}
           style={{
-            height: 48,
-            paddingLeft: 5,
-            width: 180,
+            height: 40,
+            width: 222,
           }}
         />
       </View>
       <View style={styles.action}>
         <TextInput
-          placeholder="Ingrese Cvu"
+          label="Ingrese CVU"
           autoCapitalize="none"
+          mode="outlined"
           style={{
-            height: 48,
-            paddingLeft: 5,
-            width: 180,
+            height: 40,            
+            width: 222,
           }}
         />
       </View>
-      <View style={{
-        marginTop: 15,
-        marginLeft: 80
-      }} >
+      <View style={[{
+        width: 222,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+      }, styles.action]} >
         <Picker
           onValueChange={(val) => handleChange({ value: val || "pesos", type: 'currency' })}
           style={{
-            color: 'black',
+            color: '#9C9C9C',
             width: 100,
+            height: 40,
+            marginTop: 8,
+            fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
+            fontSize: 16,
+            borderColor: '#9C9C9C',
+            paddingLeft: 14
           }}
         >
-          <Picker.Item label="$" value="pesos" />
+          {/* <Picker.Item label="$" value="pesos" /> */}
           <Picker.Item label="$" value="pesos" />
           <Picker.Item label="U$D" value="dolares" />
         </Picker>
-      </View>
-      <View style={styles.monto}>
         <TextInput
-          placeholder="$ monto"
+          label="Monto"
           autoCapitalize="none"
           keyboardType="decimal-pad"
+          mode="outlined"
           onChangeText={(val) => handleChange({ value: val, type: 'amount' })}
           style={{
             height: 40,
             paddingLeft: 5,
-            width: 80,
-            fontSize: 12
+            width: 100,
           }}
         />
       </View>
+      
       <View style={styles.checkboxContainer}>
         <CheckBox
           value={isSelected}
           onValueChange={setSelection}
-          style={styles.checkbox}
+          style={{marginRight: 4}}
         />
+        <Text>Acepto usar la sección amigos con fines personales {isSelected ? "👍" : "👎"}</Text>
       </View>
-      <Text>Acepto usar la sección amigo  con fines personales  {isSelected ? "👍" : "👎"}</Text>
-      <View
-        style={{
-          marginTop: 60
-        }}>
-        <View style={styles.botones}>
-          <View style={styles.boton}>
+      </View>
+          <View style={styles.center}>
             <Button style={styles.iconButtons}
               onPress={() => {
                 handleSendMoney();
               }}>
               <Transfer name="send" size={30} color="#fff" />
             </Button>
-            <Paragraph style={{ fontWeight: '700', marginLeft: -36 }}>Enviar</Paragraph>
+            <Paragraph style={{ fontWeight: '700'}}>Enviar</Paragraph>
           </View>
-        </View>
-      </View>
+        </ScrollView>
     </View>
   )
 }
@@ -191,9 +208,7 @@ const styles = StyleSheet.create({
   },
   action: {
     flexDirection: 'row',
-    marginTop: 20,
-    marginLeft: 90,
-    paddingBottom: 5
+    marginTop: '5%',
   },
   monto: {
     flexDirection: 'row',
@@ -205,18 +220,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 30,
   },
+  center: {
+		display: 'flex',
+		alignItems: 'center',
+		flexDirection: 'column'
+	},
   boton: {
     alignItems: 'center',
-    marginTop: 60,
-    marginLeft: 20
   },
   iconButtons: {
-    backgroundColor: '#006A34',
-    marginBottom: 10,
-    borderRadius: 20,
-    marginTop: -65,
-    width: 15,
-    marginLeft: -32
+    backgroundColor: '#097934',
+		marginBottom: 12,
+		borderRadius: 20,
+		marginTop: 25
   },
   heading: {
     marginBottom: 10,
@@ -226,5 +242,11 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row'
   },
+  checkboxContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: '5%'
+  }
 
 });

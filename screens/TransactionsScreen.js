@@ -211,7 +211,6 @@ const styles = StyleSheet.create({
   row: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'flex-end',
     margin: 10
   },
   title: {

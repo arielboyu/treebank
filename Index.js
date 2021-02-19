@@ -42,9 +42,6 @@ import SendCvuScreen from './screens/SendCvu';
 
 LogBox.ignoreAllLogs(true)
 
-
-
-
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
@@ -121,8 +118,7 @@ const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
                 >
                     <Tab.Screen
                         name="Inicio"
-                        component={Main}
-
+                        children={() => <Main darkTheme={isDarkTheme}/>}
                         options={{
                             tabBarIcon: ({ color }) => (
                                 <Icon
@@ -166,22 +162,6 @@ const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
                 <Tab.Screen
                     name="Productos"
                     component={ProductsScreen}
-
-                    options={{
-                    tabBarIcon: ({ color }) => (
-                        <Icon
-                        name="wallet"
-                        color={color}
-                        size={23}
-                        />
-                    ),
-                    tabBarColor: "#279152"
-                    }}
-
-                />
-                <Tab.Screen
-                    name="SendCvu"
-                    component={SendCvuScreen}
 
                     options={{
                     tabBarIcon: ({ color }) => (

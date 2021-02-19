@@ -18,6 +18,7 @@ const Header = (props) => {
 	}, [])
 
 	const { email, firstName, lastName, photoURL } = user.loggedUser;
+    const { darkTheme } = props
 
     return(
         <>
@@ -39,7 +40,7 @@ const Header = (props) => {
                     onDismiss={() => setVisible(false)}
                     //dismissable={false}
                     contentContainerStyle={styles.content}
-                    style={styles.sideBar}
+                    style={[styles.sideBar, {backgroundColor: darkTheme ? '#333333' : '#FFFF'}]}
                 >
                     <View>
                         <View style={[styles.center, styles.section]}>
@@ -68,11 +69,10 @@ const Header = (props) => {
 
 const styles = StyleSheet.create({
 	sideBar: {
-		backgroundColor : 'rgba(93, 177, 31,0.9)',
 		width: '60%',
 		height: '100%',
-    display: 'flex',
-    justifyContent: 'flex-start',
+        display: 'flex',
+        justifyContent: 'flex-start',
     },
     greeting: {
 		display: "flex",

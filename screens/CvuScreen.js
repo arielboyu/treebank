@@ -36,11 +36,11 @@ export default function CvuScreen({changeScreen}) {
         backgroundColor="transparent"
         onPress={() => changeScreen('prod')}
         />
-        <Headline>Mis cuentas</Headline>
+        <Headline>Mis cuentas...</Headline>
         </View>
         <View style={styles.logo}>
         <ImageBackground
-        style={{width:220,height:220}}
+        style={{width:140,height:140}}
         source={require('../assets/LogoVector.png')}
         >
         </ImageBackground>
@@ -58,93 +58,82 @@ export default function CvuScreen({changeScreen}) {
 									source={require('../assets/backgroundCard1.jpeg')}
 									style={styles.mainCard}
 									imageStyle={{ borderRadius: 15 }}>
-									<View>
-                  <Text style={{alignItems:'center',
-                  width:250,
-                  marginTop:26,
-                  height:36,
-                  marginLeft:10,
-                  color:'white',fontSize:24
-                }}>CVU - Cuenta Pesos</Text>
-										<Text style={{alignItems:'center',
-                    width:254,
-              			marginTop:6,
-                    height:48,
-              			marginLeft:10,
-                    color:'white',
-                    fontSize:20,
-                    backgroundColor: '#006A34',
-                    borderRadius: 12,
-                    opacity:0.8,
-                    }}>{` ${cvu}`}</Text>
-                    <View style={styles.botonCompartir}>
+                  <View style={styles.cont}>
                     <View>
-                    <Button
-                     onPress={handldeWhatsAppPress}
-                     style={styles.iconButtons}>
-                    <Icon name="whatsapp" size={28} color="#fff" />
-                    </Button>
-                    <Paragraph style={{fontWeight: '700',marginLeft:14,marginTop:-10,fontSize:12}}>Compartir</Paragraph>
+                      <Text style={{
+                        color:'white',
+                        fontSize:24
+                        }}>
+                          Cuenta en pesos
+                      </Text>
                     </View>
+                  <View>
+                      <Text style={{alignItems:'center',
+                      width:254,
+                      margin:6,
+                      height:48,
+                      color:'white',
+                      fontSize:20,
+                      backgroundColor: '#006A34',
+                      borderRadius: 12,
+                      opacity:0.8,
+                      }}>{` ${cvu}`}</Text>
+                  </View>
+                  <View style={styles.row}>
+                      <Paragraph style={styles.cardText}>{`${firstName} ${lastName}`}</Paragraph>
+                      <View style={styles.botonCompartir}>
+                      <Button
+                      onPress={handldeWhatsAppPress}
+                      style={styles.iconButtons}>
+                      <Icon name="whatsapp" size={28} color="#fff" />
+                      </Button>
+                      <Paragraph style={{fontWeight: '700'}}>Compartir</Paragraph>
+                      </View>
+                      
                     </View>
-									</View>
-									<View style={styles.cardInfo}>
-										<Paragraph style={{alignItems:'center',
-                    width:220,
-              			marginTop:-60,
-                    height:36,
-              			marginLeft:-10,
-                    fontSize:20,
-                    color:'white'
-                    }}>{`${firstName} ${lastName}`}</Paragraph>
-									</View>
+                  </View>
 								</ImageBackground>
 				 	   		</View>
+                  
 			      		<View>
 								<ImageBackground
 									source={require('../assets/backgroundCard2.jpeg')}
 									style={styles.mainCard}
 									imageStyle={{ borderRadius: 15 }}
                   >
+                  <View style={styles.cont}>
+                    <View>
+                      <Text style={{
+                        color:'white',
+                        fontSize:24
+                        }}>
+                          Cuenta en dólares
+                      </Text>
+                    </View>
                   <View>
-                  <Text style={{alignItems:'center',
-                  width:250,
-                  marginTop:26,
-                  height:36,
-                  marginLeft:10,
-                  color:'white',fontSize:24
-                }}>CVU - Cuenta Dolares</Text>
-                    <Text style={{alignItems:'center',
-                    width:254,
-                    marginTop:6,
-                    height:48,
-                    marginLeft:10,
-                    color:'white',
-                    fontSize:20,
-                    backgroundColor: '#006A34',
-                    borderRadius: 12,
-                    opacity:0.8,
-                  }}>{` ${cvuUS}`}</Text>
-                  <View style={styles.botonCompartir}>
-                  <View>
-                  <Button
-                   onPress={handldeWhatsAppPressUS}
-                   style={styles.iconButtons}>
-                  <Icon name="whatsapp" size={28} color="#fff" />
-                  </Button>
-                  <Paragraph style={{fontWeight: '700',marginLeft:14,marginTop:-10,fontSize:12}}>Compartir</Paragraph>
+                      <Text style={{alignItems:'center',
+                      width:254,
+                      margin:6,
+                      height:48,
+                      color:'white',
+                      fontSize:20,
+                      backgroundColor: '#006A34',
+                      borderRadius: 12,
+                      opacity:0.8,
+                      }}>{` ${cvuUS}`}</Text>
                   </View>
-                  </View>
-                  </View>
-                  <View style={styles.cardInfo}>
-                    <Paragraph style={{alignItems:'center',
-                    width:220,
-                    marginTop:-60,
-                    height:36,
-                    marginLeft:-10,
-                    fontSize:20,
-                    color:'white'
-                    }}>{`${firstName} ${lastName}`}</Paragraph>
+                  <View style={styles.row}>
+                      <Paragraph style={styles.cardText}>{`${firstName} ${lastName}`}</Paragraph>
+                      <View style={styles.botonCompartir}>
+                      <Button
+                      onPress={handldeWhatsAppPressUS}
+                      style={styles.iconButtons}>
+                      <Icon name="whatsapp" size={28} color="#fff" />
+                      </Button>
+                      <Paragraph style={{fontWeight: '700'}}>Compartir</Paragraph>
+                      </View>
+                      
+                    </View>
                   </View>
 								</ImageBackground>
 							</View>
@@ -164,36 +153,46 @@ const styles = StyleSheet.create({
   	},
     logo: {
        alignItems:'center',
-       marginTop:40,
-       marginBottom:10
+       marginTop:30,
+       marginBottom:'10%'
+    },
+    cont: {
+      height: '100%',
+      display: 'flex',
+      justifyContent: 'space-around'
     },
     heading: {
-      marginBottom: 10,
-      marginTop: 10,
-      fontSize: 35,
-      alignItems : 'center',
-      display: 'flex',
-      flexDirection: 'row',
-      marginLeft:10
+      marginBottom: '2%',
+    marginTop: '2%',
+ 		fontSize: 35,
+		alignItems : 'center',
+		display: 'flex',
+		flexDirection: 'row'
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between', 
+    alignItems: 'center'
   },
   botonCompartir: {
-     alignItems:'center',
-     marginTop:-6,
-     marginLeft:200
+    display: 'flex',
+		alignItems: 'center',
 
   },
   iconButtons: {
     backgroundColor: '#006A34',
-    marginBottom: 10,
+    marginBottom: 5,
     borderRadius: 16,
-    marginTop: 25,
+    display: 'flex',
+    alignItems:'center',
+    justifyContent: 'center',
     width:50,
     height:42,
-    marginLeft:12
   },
  	mainCard: {
- 		width: 310,
- 		height: 190,
+ 		width: 320,
+ 		height: 200,
  		padding: 10,
  		borderRadius: 20,
  		marginTop: 10,
@@ -208,7 +207,7 @@ const styles = StyleSheet.create({
 		marginLeft: 15
   	},
   	scroll: {
-		height: 200,
+		height: 215,
 		width: "100%"
   	},
 	sideBar: {
@@ -216,5 +215,11 @@ const styles = StyleSheet.create({
 		width: '60%',
 		height: '100%',
 		padding: 10
-	}
+	},
+  cardText: {
+		fontSize: 17,
+		color: '#F7F7F9',
+		letterSpacing: 1,
+		fontWeight: '300'
+	},
 });

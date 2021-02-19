@@ -176,10 +176,10 @@ export default function Login({ navigation }) {
   };
 
   const handleLogin2 = () => {
-    /*     console.log("loggedUSER >>", loggedUser)
-        if (loggedUser.isValidUser && loggedUser.isValidPassword) { */
+        //console.log("loggedUSER >>", loggedUser)
+        if (loggedUser.isValidUser && loggedUser.isValidPassword) {
     dispatch(login(loggedUser));
-    /*  } */
+		}
   };
 
 
@@ -187,121 +187,120 @@ export default function Login({ navigation }) {
 	return (
 		<View style={styles.container}>
 		<View style={styles.logo}>
-    <DropdownAlert
-        ref={ref => (dropdown = ref)}
-        closeInterval={5000}
-      />
+		<DropdownAlert
+			ref={ref => (dropdown = ref)}
+			closeInterval={5000}
+		/>
 		<ImageBackground style={{ width: 140, height: 140 }}
 		source={require('../assets/LogoVector.png')} />
 		</View>
-		<View style={styles.action}>
-		<FontAwesome
-		 name="user-o"
-		 size={20}
-		 style={{marginRight:5,marginTop:15}}
-		 />
-		 <TextInput
-		 placeholder="Correo Electrónico"
-		 autoCapitalize="none"
-		 onChangeText={(val) => textInputChange(val)}
-		 // onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
-		 style={{
-		 height:48,
-		 paddingLeft:5,
-		 width:210,
-		 backgroundColor:"transparent",
-		 }}
-		 />
-		 {data.check_textInputChange ?
-		 <Animatable.View animation="bounceIn">
-		 <Feather
-		 name="check-circle"
-		 color="green"
-		 size={20}
-		 style={{marginTop:15}}
-		 />
-		 </Animatable.View>
-		 : null}
-		 </View>
-		 { data.isValidUser ? null :
-		 <Animatable.View animation="fadeInLeft" duration={500}>
-		 <Text style={styles.errorMsg}>Ingresar e-mail</Text>
-		 </Animatable.View>
-		 }
-		 <View style={styles.action}>
-		 <Feather
-		 name="lock"
-		 size={20}
-		 style={{marginRight:5,marginTop:15}}
-		 />
-		 <TextInput
-		 placeholder="Contraseña"
-		 secureTextEntry={data.secureTextEntry ? true : false}
-		 autoCapitalize="none"
-		 onChangeText={(val) => handlePasswordChange(val)}
-		 style={{
-		 height:48,
-		 paddingLeft:5,
-		 width:210,
-		 backgroundColor:"transparent",
-
-		 }}
-		 />
-		 <TouchableOpacity
-		 onPress={updateSecureTextEntry}
-		 >
-		 {data.secureTextEntry ?
-		 <Feather
-		 name="eye-off"
-		 color="grey"
-		 size={20}
-		 style={{marginTop:15}}
-		 />
-		 :
-		 <Feather
-		 name="eye"
-		 color="grey"
-		 size={20}
-		 style={{marginTop:15}}
-		 />
-		 }
-		 </TouchableOpacity>
-		 </View>
-		 <View
-		 style={{marginTop:60
-		 }}>
-		 <View>
-		 <View style={styles.boton}>
-		 <Button
-		 mode="contained"
-		 onPress={handleLogin}
-		 style={{
-		 backgroundColor : '#006A34',
-		 }}>
-		 INGRESAR
-		 </Button>
-		 </View>
-		 </View>
-			 <Button
-			 mode="contained"
-			 onPress={
-          state.compatible
-            ? checkForBiometrics
-            : showIncompatibleAlert
-        }
-			 style={{
-				 borderRadius:9,
-				 marginTop: 25,
-				 marginLeft:'38%',
-				 width: 106,
-			   backgroundColor : '#006A34',
-			 }}>
-			 <Entypo
-			 name="fingerprint"
-			 color="white"
-			 size={30}
-			 />
-			 </Button>
+			<View style={styles.inputCont}>
+				<View style={styles.action}>
+				<FontAwesome
+				name="user-o"
+				size={20}
+				style={{marginRight:5,marginTop:15}}
+				/>
+				<TextInput
+				placeholder="Correo Electrónico"
+				autoCapitalize="none"
+				style={styles.textInputs}
+				mode='flat'
+				onChangeText={(val) => textInputChange(val)}
+				// onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
+				/>
+				{data.check_textInputChange ?
+				<Animatable.View animation="bounceIn">
+				<Feather
+				name="check-circle"
+				color="green"
+				size={20}
+				style={{marginTop:15}}
+				/>
+				</Animatable.View>
+				: null}
+				</View>
+				{ data.isValidUser ? null :
+				<Animatable.View animation="fadeInLeft" duration={500}>
+				<Text style={styles.errorMsg}>Ingresar e-mail</Text>
+				</Animatable.View>
+				}
+				<View style={[styles.action, {paddingLeft: '1%'}]}>
+				<Feather
+				name="lock"
+				size={20}
+				style={{marginRight:5,marginTop:15}}
+				/>
+				<TextInput
+				placeholder="Contraseña"
+				secureTextEntry={data.secureTextEntry ? true : false}
+				autoCapitalize="none"
+				style={styles.textInputs}
+				onChangeText={(val) => handlePasswordChange(val)}
+				mode="flat"
+				right={data.secureTextEntry ?
+					<TextInput.Icon
+					name="eye-off"
+					color="grey"
+					size={20}
+					style={{marginTop:15}}
+					onPress={updateSecureTextEntry}
+					/>
+					:
+					<TextInput.Icon
+					name="eye"
+					color="grey"
+					size={20}
+					style={{marginTop:15}}
+					onPress={updateSecureTextEntry}
+					/>}
+				/>
+				{/* <TouchableOpacity
+				onPress={updateSecureTextEntry}
+				>
+				 {data.secureTextEntry ?
+				<Feather
+				name="eye-off"
+				color="grey"
+				size={20}
+				style={{marginTop:15}}
+				/>
+				:
+				<Feather
+				name="eye"
+				color="grey"
+				size={20}
+				style={{marginTop:15}}
+				/>
+				} 
+				</TouchableOpacity> */}
+				</View>
+			</View>
+		 <View style={styles.buttonCont}>
+			<View style={styles.boton}>
+				<Button
+				mode="contained"
+				onPress={handleLogin}
+				style={styles.button}>
+				INGRESAR
+				</Button>
+			</View>
+			<View style={styles.boton}>
+				<Button
+				mode="contained"
+				onPress={
+					state.compatible
+					? checkForBiometrics
+					: showIncompatibleAlert
+				}
+				style={styles.button}>
+				<Entypo
+				name="fingerprint"
+				color="white"
+				size={30}
+				/>
+				</Button>
+			 </View>
 	 </View>
 	</View>
 	);
@@ -316,8 +315,25 @@ container: {
 },
 boton: {
 	alignItems: 'center',
-	marginTop:50,
-	marginLeft:5
+	width: '100%'
+},
+button: {
+	borderRadius:9,
+	width: '50%',
+	backgroundColor : '#006A34',
+	marginBottom: '5%'
+},
+inputCont: {
+	display: 'flex',
+	width: '100%',
+	alignItems: "center",
+	marginTop: '5%'
+},
+buttonCont: {
+	marginTop: '10%',
+	width: '100%',
+	display: 'flex',
+	alignItems: 'center'
 },
 iconButtons: {
 	marginBottom: 10,
@@ -330,16 +346,22 @@ logo: {
 	alignItems:'center',
 	marginTop:30
 },
-	action: {
-			flexDirection:'row',
-
-			marginTop:20,
-			marginLeft:"20%",
-			paddingBottom:5
-	},
-	errorMsg: {
-			color: '#FF0000',
-			fontSize: 14,
-			marginLeft:100
-	},
+action: {
+	width: '50%',
+	marginBottom: '5%',
+	display: 'flex',
+	flexDirection: 'row',
+	alignItems: 'center',
+	justifyContent: 'center'
+},
+textInputs: {
+	height:48,
+	backgroundColor:"transparent",
+	width: '100%'
+},
+errorMsg: {
+		color: '#FF0000',
+		fontSize: 14,
+		marginLeft:100
+},
 });

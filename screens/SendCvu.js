@@ -5,13 +5,14 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import logo from '../assets/logo.png'
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
+import { ButtonGroup } from 'react-native-elements'
 import { Picker } from '@react-native-picker/picker';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import IP from '../src/redux/actions/ip';
 
 
-export default function SendCvu({ changeScreen, navigation }) {
+export default function SendCvu({ changeScreen, navigation, selected, updateSelected }) {
   const [isSelected, setSelection] = useState(false);
   const contacts = useSelector(state => state.user.loggedUser.contacts)
   const userId = useSelector(state => state.user.loggedUser.id)
@@ -66,61 +67,64 @@ export default function SendCvu({ changeScreen, navigation }) {
           backgroundColor="transparent"
           onPress={() => changeScreen('main')}
         />
-        <Headline>Enviar Dinero</Headline>
+        <Headline>Enviar dinero...</Headline>
       </View>
       <View style={styles.logo}>
         <ImageBackground
-          style={{ width: 60, height: 60 }}
+          style={{ width: 140, height: 140 }}
           source={require('../assets/LogoVector.png')}
         >
         </ImageBackground>
       </View>
+      <View style={styles.center}> 
+      <View style={styles.action}>
+        <ButtonGroup
+          onPress={updateSelected}
+          selectedIndex={selected}
+          buttons={["Cliente TreeBank", "Otros bancos"]}
+          containerStyle={{height: 40, width: 222}}
+          selectedButtonStyle={{backgroundColor: '#006A34'}}
+        />
+      </View>
       <View style={styles.action}>
         <TextInput
-          placeholder="Ingrese Cvu"
+          label="Ingrese CVU"
           onChangeText={(val) => handleChange({ value: val, type: 'cvu_receiver' })}
           autoCapitalize="none"
+          mode="outlined"
           style={{
-            height: 48,
-            paddingLeft: 5,
-            width: 180,
+            height: 40,
+            width: 222,
           }}
         />
       </View>
-      <View style={{
-        marginTop: 15,
-        marginLeft: 80
-      }} >
-
-      </View>
-      <View style={styles.monto}>
+      <View style={styles.action}>
         <TextInput
-          placeholder="$ monto"
+          label="Monto"
           autoCapitalize="none"
           keyboardType="decimal-pad"
           onChangeText={(val) => handleChange({ value: val, type: 'amount' })}
+          mode="outlined"
           style={{
-            marginTop:20,
             height: 40,
-            paddingLeft: 5,
-            width: 80,
-            fontSize: 12
+            width: 222,
           }}
         />
+        </View>
       </View>
       <View style={styles.checkboxContainer}>
         <CheckBox
           value={isSelected}
           onValueChange={setSelection}
-          style={styles.checkbox}
+          style={{marginRight: 4}}
         />
+        <Text>Acepto usar la sección amigos con fines personales {isSelected ? "👍" : "👎"}</Text>
       </View>
-      <Text>Acepto usar la sección amigo  con fines personales  {isSelected ? "👍" : "👎"}</Text>
+      
       <View
         style={{
           marginTop: 60
         }}>
-        <View style={styles.botones}>
           <View style={styles.boton}>
             <Button style={styles.iconButtons}
               onPress={() => {
@@ -128,9 +132,8 @@ export default function SendCvu({ changeScreen, navigation }) {
               }}>
               <Transfer name="send" size={30} color="#fff" />
             </Button>
-            <Paragraph style={{ fontWeight: '700', marginLeft: -36 }}>Enviar</Paragraph>
+            <Paragraph style={{ fontWeight: '700' }}>Enviar</Paragraph>
           </View>
-        </View>
       </View>
     </View>
   )
@@ -144,32 +147,25 @@ const styles = StyleSheet.create({
   },
   action: {
     flexDirection: 'row',
-    marginTop: 20,
-    marginLeft: 90,
-    paddingBottom: 5
-  },
-  monto: {
-    flexDirection: 'row',
-    marginTop: -40,
-    marginLeft: 190,
-    paddingBottom: 5
+    marginTop: '5%',
   },
   logo: {
     alignItems: 'center',
     marginTop: 30,
   },
+  center: {
+		display: 'flex',
+		alignItems: 'center',
+		flexDirection: 'column'
+	},
   boton: {
     alignItems: 'center',
-    marginTop: 60,
-    marginLeft: 20
   },
   iconButtons: {
-    backgroundColor: '#006A34',
-    marginBottom: 10,
-    borderRadius: 20,
-    marginTop: -65,
-    width: 15,
-    marginLeft: -32
+    backgroundColor: '#097934',
+		marginBottom: 12,
+		borderRadius: 20,
+		marginTop: 25
   },
   heading: {
     marginBottom: 10,
@@ -179,5 +175,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row'
   },
-
+  checkboxContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: '5%'
+  }
 });

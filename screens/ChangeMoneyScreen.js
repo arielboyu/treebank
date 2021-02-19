@@ -104,28 +104,28 @@ export default function ChangeMoney ({changeScreen}) {
                     backgroundColor="transparent"
                     onPress={() => changeScreen('main')}
                 />
-                <Headline>Cambiar Dinero</Headline>
+                <Headline>Cambiar dinero...</Headline>
             </View>
         <View style={styles.logo}>
             <ImageBackground
-                style={{width:160,height:160}}
+                style={{width:140,height:140}}
                 source={require('../assets/LogoVector.png')}
             />
         </View>
         <View style={styles.mainCont}>
             <TextInput
                 label="Monto a cambiar"
-                placeholder={`Ingrese monto en ${selected === 0 ? "Pesos" : "Dolares"}`}
+                placeholder={`Ingrese monto en ${selected === 0 ? "Pesos" : "Dólares"}`}
                 keyboardType="numeric"
                 mode="outlined"
                 //value={amount}
                 onChangeText={(text) => {setAmount(text)}}
-                style={{height: 40, width: 222}}
+                style={{height: 40, width: 222, fontSize: 12}}
             />
             <ButtonGroup
                 onPress={updateSelected}
                 selectedIndex={selected}
-                buttons={["Pesos a Dolares", "Dolares a Pesos"]}
+                buttons={["Pesos a Dólares", "Dólares a Pesos"]}
                 containerStyle={{height: 40, width: 222}}
                 selectedButtonStyle={{backgroundColor: '#006A34'}}
             />
@@ -157,11 +157,11 @@ const styles = StyleSheet.create({
   	},
     logo: {
         alignItems:'center',
-        marginTop:30,
+        marginTop:'5%',
     },
     mainCont: {
         width: '100%',
-        flex: 1,
+        display: 'flex',
         alignItems: 'center',
         marginTop: 20,
         marginBottom: 20
