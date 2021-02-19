@@ -149,7 +149,7 @@ export default function PhoneBook({changeScreen}) {
                </View>
               ) : null}
               <FlatList
-                data={info.contacts.sort()}
+                data={info.contacts}
                 
                 onPress={() => {alert}}
                 renderItem={renderItem}
