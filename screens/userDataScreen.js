@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Image, ImageBackground,Headline, TouchableOpacity, Platform,Divider } from 'react-native';
+import { View, StyleSheet, Image, ImageBackground, TouchableOpacity, Platform,Divider } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Feather from 'react-native-vector-icons/Feather';
 import { Picker } from '@react-native-picker/picker';
@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import logo from '../assets/LogoVector.png';
 import { createAccount, dischargeNewUser, getUsers } from '../src/redux/actions/user';
-import { TextInput, Button,Text } from 'react-native-paper';
+import { Headline, TextInput, Button,Text } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -43,20 +43,15 @@ export default function userDataScreen({changeScreen}) {
 	return (
 		<View style={styles.container}>
 		<View style={styles.heading}>
-		<Icon.Button
-		name="arrow-left"
-		size={25}
-		color="black"
-		backgroundColor="transparent"
-		onPress={() => changeScreen('main')}
-		/>
-		<Text style={{fontSize:20}} >	<Entypo
-			name="user"
-			size={20}
-			color="black"
-			backgroundColor="#FFFF"
-			/>  Mis Datos</Text>
-		</View>
+        <Icon.Button
+          name="arrow-left"
+          size={25}
+          color="black"
+		  backgroundColor="transparent"
+          onPress={() => {changeScreen('main')}}
+        />
+        <Headline>Mis datos...</Headline>
+      </View>
 			<View style={styles.imagenview} />
 			<View style={styles.imageaction}>
 				<TouchableOpacity style={styles.button_image} onPress={openImgPictureAsync}>
@@ -122,14 +117,24 @@ export default function userDataScreen({changeScreen}) {
 const styles = StyleSheet.create({
 	container    : {
 		flex            : 1,
+		padding: 20,
 	},
+	heading: {
+		marginBottom: 10,
+		marginTop: 10,
+		fontSize: 35,
+		alignItems: 'center',
+		display: 'flex',
+		flexDirection: 'row'
+	  },
 
 	imageaction  : {
 		flexDirection : 'row',
 		position      : 'relative',
 		top           : 40,
 		left          : 145,
-		width         : 120
+		width         : 120, 
+		marginBottom: '10%'
 	},
 	image        : {
 		height       : 100,
@@ -139,8 +144,7 @@ const styles = StyleSheet.create({
 	},
 	label: {
 		flexDirection : 'row',
-		marginTop:130,
-		marginBottom:-80,
+		marginTop: '5%',
 		marginLeft:40
 	}
 });

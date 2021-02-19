@@ -1,14 +1,13 @@
 import React, { useState,  useEffect } from 'react';
 import {
-  StyleSheet, View, TouchableOpacity,
-  TextInput, SafeAreaView, FlatList,
+  StyleSheet, View, TouchableOpacity, SafeAreaView, FlatList,
   ActivityIndicator, StatusBar, Text,
   Dimensions,Alert
 } from 'react-native';
 import {useSelector} from 'react-redux';
 
 import * as Contacts from 'expo-contacts';
-import { Headline } from 'react-native-paper';
+import { Headline, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 //crear get para comparar usuarios cargados en el db
@@ -70,7 +69,7 @@ export default function PhoneBook({changeScreen}) {
    let renderItem = ({item})=>(
     <View style={{minHeight:70,padding:5}}>
       <TouchableOpacity onPress={()=>createButtonAlert(item)}>
-      <Text style={{color: 'black', fontWeight:'bold', fontSize:26}}>
+      <Text style={{color: 'black', fontSize:26}}>
         {item.firstName + ' '}{item.lastName}
       </Text>
       </TouchableOpacity>
@@ -125,19 +124,15 @@ export default function PhoneBook({changeScreen}) {
           backgroundColor="#FFFF"
           onPress={() => changeScreen('main')}
         />
-        <Headline>Contactos</Headline>
+        <Headline>Mis contactos...</Headline>
       </View>
       <View style={{flex:1}}>
         <TextInput
-              placeholder="Buscar contactos"
-              placeholderTextColor="#dddddd"
+              label="Buscar contactos"
+              mode="outlined"
               style={{
-                    backgroundColor:'#2f363c',
-                    height: 70,
-                    fontSize: 36,
-                    padding: 10,
-                    borderBottomWidth: 1.5,
-                    borderBottomColor: '#7d90a0'
+                    height: 40,
+                    marginBottom: '5%'
               }}
               onChangeText={(value) => searchContacts(value)}
           />
@@ -154,7 +149,7 @@ export default function PhoneBook({changeScreen}) {
                </View>
               ) : null}
               <FlatList
-                data={info.contacts}
+                data={info.contacts.sort()}
                 
                 onPress={() => {alert}}
                 renderItem={renderItem}

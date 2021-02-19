@@ -158,7 +158,7 @@ export default function Login({ navigation }) {
   };
 
   const scanBiometrics = async () => {
-  	let result = await LocalAuthentication.authenticateAsync();
+    let result = await LocalAuthentication.authenticateAsync();
     if (result.success) {
       dropdown.alertWithType(
         'success',
@@ -176,10 +176,10 @@ export default function Login({ navigation }) {
   };
 
   const handleLogin2 = () => {
-    /*     console.log("loggedUSER >>", loggedUser)
-        if (loggedUser.isValidUser && loggedUser.isValidPassword) { */
+        //console.log("loggedUSER >>", loggedUser)
+        if (loggedUser.isValidUser && loggedUser.isValidPassword) {
     dispatch(login(loggedUser));
-    /*  } */
+		}
   };
 
 
@@ -187,10 +187,10 @@ export default function Login({ navigation }) {
 	return (
 		<View style={styles.container}>
 		<View style={styles.logo}>
-    	<DropdownAlert
+    {/* <DropdownAlert
         ref={ref => (dropdown = ref)}
         closeInterval={5000}
-      />
+      /> */}
 		<ImageBackground style={{ width: 140, height: 140 }}
 		source={require('../assets/LogoVector.png')} />
 		</View>
@@ -225,7 +225,7 @@ export default function Login({ navigation }) {
 				<Text style={styles.errorMsg}>Ingresar e-mail</Text>
 				</Animatable.View>
 				}
-				<View style={[styles.action, {paddingLeft: '1rem'}]}>
+				<View style={[styles.action, {paddingLeft: '1%'}]}>
 				<Feather
 				name="lock"
 				size={20}
@@ -238,11 +238,27 @@ export default function Login({ navigation }) {
 				style={styles.textInputs}
 				onChangeText={(val) => handlePasswordChange(val)}
 				mode="flat"
+				right={data.secureTextEntry ?
+					<TextInput.Icon
+					name="eye-off"
+					color="grey"
+					size={20}
+					style={{marginTop:15}}
+					onPress={updateSecureTextEntry}
+					/>
+					:
+					<TextInput.Icon
+					name="eye"
+					color="grey"
+					size={20}
+					style={{marginTop:15}}
+					onPress={updateSecureTextEntry}
+					/>}
 				/>
-				<TouchableOpacity
+				{/* <TouchableOpacity
 				onPress={updateSecureTextEntry}
 				>
-				{data.secureTextEntry ?
+				 {data.secureTextEntry ?
 				<Feather
 				name="eye-off"
 				color="grey"
@@ -256,8 +272,8 @@ export default function Login({ navigation }) {
 				size={20}
 				style={{marginTop:15}}
 				/>
-				}
-				</TouchableOpacity>
+				} 
+				</TouchableOpacity> */}
 				</View>
 			</View>
 		 <View style={styles.buttonCont}>
@@ -341,6 +357,7 @@ action: {
 textInputs: {
 	height:48,
 	backgroundColor:"transparent",
+	width: '100%'
 },
 errorMsg: {
 		color: '#FF0000',

@@ -11,7 +11,7 @@ import Header from '../src/components/Header';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //Mi posición consolidada
-const MainScreen = ({changeScreen}) => {
+const MainScreen = ({changeScreen, darkTheme}) => {
 	const dispatch = useDispatch();
 
   	useEffect(() => {
@@ -66,7 +66,7 @@ const MainScreen = ({changeScreen}) => {
 	const smallHeight = windowHeight < 670;
 	const smallWidth = windowWidth < 380;
 	const smallWidth2 = windowWidth < 355;
-
+	const bigWidth = windowWidth > 500;
 
 	const { firstName, lastName, movements } = user.loggedUser;
 
@@ -149,22 +149,22 @@ const MainScreen = ({changeScreen}) => {
 	}
 
 	const card = ({item, index}) => (
-		<View>
+		
 			<ImageBackground
 				source={index === 0 ? require(`../assets/backgroundCard1.jpeg`) : require(`../assets/backgroundCard2.jpeg`)}
-				style={smallWidth2 ? styles.superSmallMainCard : smallWidth ? styles.smallMainCard : styles.mainCard}
+				style={smallWidth2 ? styles.superSmallMainCard : smallWidth ? styles.smallMainCard : bigWidth ? styles.bigMainCard : styles.mainCard}
 				imageStyle={{ borderRadius: 15 }}>
 				<View>
 					<Paragraph>Balance actual</Paragraph>
-					<Text style={smallWidth ? styles.smallBigText : styles.bigText}>
+					<Text style={smallWidth ? styles.smallBigText : bigWidth ? styles.bigText2 : styles.bigText}>
 						{`${item.tipo === 'dolares' ? 'US$' : '$'}${item.balance}`}
 					</Text>
 				</View>
 				<View style={styles.cardInfo}>
-					<Paragraph style={styles.cardText}>
+					<Paragraph style={bigWidth ? styles.bigCardText : styles.cardText}>
 						{`${firstName} ${lastName}`}
 					</Paragraph>
-					<Paragraph style={styles.cardText}>
+					<Paragraph style={bigWidth ? styles.bigCardText : styles.cardText}>
 						{smallWidth 
 							? `******************${item.tipo === 'dolares' ? item.cvuUS.slice(item.cvuUS.length - 4, item.cvuUS.length) : item.cvu.slice(item.cvu.length - 4, item.cvu.length)}\n${smallWidth2 ? "" : item.tipo.charAt(0).toUpperCase() + item.tipo.slice(1)}` 
 							: `******************${item.tipo === 'dolares' ? item.cvuUS.slice(item.cvuUS.length - 4, item.cvuUS.length) : item.cvu.slice(item.cvu.length - 4, item.cvu.length)} | ${item.tipo.charAt(0).toUpperCase() + item.tipo.slice(1)}`
@@ -172,7 +172,7 @@ const MainScreen = ({changeScreen}) => {
 					</Paragraph>
 				</View>
 			</ImageBackground>
-		</View>
+		
 	);
 
 	return (
@@ -187,6 +187,7 @@ const MainScreen = ({changeScreen}) => {
 							title={`Hola, ${firstName}...`}
 							changeScreen={changeScreen}
 							menu={true}
+							darkTheme={darkTheme}
 						/>
 						<FlatList
 							keyExtractor={keyExtractor}
@@ -198,7 +199,7 @@ const MainScreen = ({changeScreen}) => {
 							extraData={user.loggedUser}
 							renderItem={card}
 							showsHorizontalScrollIndicator={false}
-							style={smallHeight ? styles.smallScroll : styles.scroll}
+							style={smallHeight ? styles.smallScroll : bigWidth ? styles.bigScroll : styles.scroll}
 						/>
 					</View>
 
@@ -452,6 +453,17 @@ const styles = StyleSheet.create({
 		marginBottom: 5,
 		marginRight: 5
 	 },
+	 bigMainCard:{
+		width: 500,
+		height: 314,
+		padding: 20,
+		borderRadius: 20,
+		marginTop: 5,
+		marginBottom: 5,
+		marginRight: 5,
+		display: 'flex',
+		justifyContent: 'space-around'
+	 },
   	white: {
  		color: "white"
   	},
@@ -491,6 +503,10 @@ const styles = StyleSheet.create({
 		height: 190,
 		width: '100%'
   	},
+	bigScroll: {
+		height: 325,
+		width: '100%'
+	},
   	general: {
 		marginTop: 10,
 		marginBottom: 15
@@ -524,6 +540,16 @@ const styles = StyleSheet.create({
 		fontWeight: '400',
 		letterSpacing: 2
 	},
+	bigText2: {
+		fontSize: 60,
+		paddingTop: 15,
+		marginTop: 25,
+		marginLeft: 15,
+		marginBottom: 5,
+		color: '#F7F7F9',
+		fontWeight: '400',
+		letterSpacing: 3
+	},
 	smallBigText: {
 		fontSize: 30,
 		paddingTop: 10,
@@ -553,6 +579,13 @@ const styles = StyleSheet.create({
 		color: '#F7F7F9',
 		letterSpacing: 1,
 		fontWeight: '300'
+	},
+	bigCardText: {
+		fontSize: 27,
+		color: '#F7F7F9',
+		letterSpacing: 2,
+		fontWeight: '200',
+		marginTop: 10
 	},
 	generalSection: {
 		display: 'flex',

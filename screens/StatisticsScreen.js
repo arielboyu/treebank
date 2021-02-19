@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 //import PureChart from 'react-native-pure-chart';
 import Svg from 'react-native-svg';
 import { useSelector } from 'react-redux';
-import { VictoryPie, VictoryAnimation, VictoryLabel, VictoryLegend } from 'victory';
+import { VictoryPie, VictoryAnimation, VictoryLabel, VictoryLegend } from 'victory-native';
 import Header from '../src/components/Header'; // Para ver desde el mobil >> victory-native
 import { getUserByID } from '../src/redux/actions/user';
 

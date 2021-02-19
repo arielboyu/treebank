@@ -80,89 +80,84 @@ export default function ChargeMoneyScreen({ changeScreen, navigation}) {
 					backgroundColor="transparent"
 					onPress={() => changeScreen('main')}
 				/>
-				<Headline>Cargar Dinero</Headline>
+				<Headline>Cargar dinero...</Headline>
 			</View>
-			<ScrollView>
+			<ScrollView showsVerticalScrollIndicator={false}>
 				<View style={styles.logo}>
-					<ImageBackground style={{ width: 160, height: 160 }} source={require('../assets/LogoVector.png')} />
+					<ImageBackground style={{ width: 140, height: 140 }} source={require('../assets/LogoVector.png')} />
 				</View>
-				<View>
-					<Text style={{ width: 120, position: 'relative', top: 5, left: 120 }}>
-						Puedes usar este código para cargar dinero a tu cuenta
-					</Text>
-				</View>
-				<View
-					style={{
-						alignItems      : 'center',
-						backgroundColor : '#006A34',
-						width           : 150,
-						position        : 'relative',
-						top             : 20,
-						left            : 100,
-						height          : 36
-					}}>
-					<Divider />
-					<Divider />
-					<Headline style={{ color: 'white' }}>{account}</Headline>
-				</View>
-				<View style={{ position: 'relative', top: 50, left: 20 }}>
-					<ImageBackground
-						style={{ width: 30, height: 30, position: 'relative', left: 135, top: -20 }}
-						source={require('../assets/pagofacil.png')}
-					/>
-					<ImageBackground
-						style={{ width: 120, height: 30, position: 'relative', left: 90, top: -20 }}
-						source={require('../assets/rapi.png')}
-					/>
-					<Text style={{ width: 150, position: 'relative', left: 90, top: -20 }}>
-						Para cargar presenta este código al cajero{' '}
-					</Text>
-				</View>
-				<View style={{ position: 'relative', top: 50 }}>
-					<Divider />
-					<Divider />
-				</View>
-				<View style={styles.boton}>
-					<View>
-						<Button style={styles.iconButtons} onPress={ chargeMoney()}>
-							<Icon name="donate" size={30} color="#fff" />
-						</Button>
-						<Paragraph style={{ fontWeight: '700' }}>Confirmar Recarga</Paragraph>
+				<View style={styles.generalCont}>
+					<View style={[styles.cont, styles.center]}>
+						<Text style={{ textAlign: 'center'}}>
+							Puedes usar este código para cargar dinero a tu cuenta
+						</Text>
 					</View>
-				</View>
-				{Platform.OS !== 'web' ? (
-					<Modal
-						visible={visible}
-						onRequestClose={() => {
-							Alert.alert('Debes esperar a Finalizar el proceso');
+					<View
+						style={{
+							alignItems      : 'center',
+							backgroundColor : '#006A34',
+							width           : 150,
+							height          : 36
 						}}>
-						<View style={styles.centeredView}>
-							<View style={styles.logo}>
-								<ImageBackground
-									style={{ width: 160, height: 160 }}
-									source={require('../assets/LogoVector.png')}
-								/>
-							</View>
-							<Paragraph style={{ fontWeight: '700', marginBottom: 15, textAlign: 'center' }}>
-								{movement}
-							</Paragraph>
-							{visibleButton ? (
-								<Button
-									mode="contained"
-									onPress={() => changeScreen("main") }
-									style={{
-										backgroundColor : '#006A34',
-										width           : 150
-									}}>
-									Ver Saldo
-								</Button>
-							) : null}
-							<ActivityIndicator animating={animation} size="large" color="#097934" />
+						<Divider />
+						<Divider />
+						<Headline style={{ color: 'white' }}>{account}</Headline>
+					</View>
+					<View style={[styles.cont, styles.center]}>
+						<ImageBackground
+							style={{ width: 50, height: 50}}
+							source={require('../assets/pagofacil.png')}
+						/>
+						<ImageBackground
+							style={{ width: 120, height: 30}}
+							source={require('../assets/rapi.png')}
+						/>
+						<Text style={{marginTop: 5, textAlign: 'center'}}>
+							Presenta este código al cajero para efectuar la carga
+						</Text>
+					</View>
+					<View>
+						<View style={styles.center}>
+							<Button style={styles.iconButtons} onPress={ chargeMoney()}>
+								<Icon name="donate" size={30} color="#fff" />
+							</Button>
+							<Paragraph style={{ fontWeight: '700' }}>Confirmar recarga</Paragraph>
 						</View>
-					</Modal>
-				) : (
-					<h1>En Construccion</h1>
-				)}
+					</View>
+					{Platform.OS !== 'web' ? (
+						<Modal
+							visible={visible}
+							onRequestClose={() => {
+								Alert.alert('Debes esperar a finalizar el proceso');
+							}}>
+							<View style={styles.centeredView}>
+								<View style={styles.logo}>
+									<ImageBackground
+										style={{ width: 160, height: 160 }}
+										source={require('../assets/LogoVector.png')}
+									/>
+								</View>
+								<Paragraph style={{ fontWeight: '700', marginBottom: 15, textAlign: 'center' }}>
+									{movement}
+								</Paragraph>
+								{visibleButton ? (
+									<Button
+										mode="contained"
+										onPress={() => changeScreen("main") }
+										style={{
+											backgroundColor : '#006A34',
+											width           : 150
+										}}>
+										Ver Saldo
+									</Button>
+								) : null}
+								<ActivityIndicator animating={animation} size="large" color="#097934" />
+							</View>
+						</Modal>
+					) : (
+						null
+					)}
+				</View>
 			</ScrollView>
 		</View>
 	);
@@ -174,6 +169,15 @@ const styles = StyleSheet.create({
 		padding         : 20,
 
 	},
+	generalCont: {
+		display: 'flex',
+		alignItems: 'center',
+	},
+	center: {
+		display: 'flex',
+		alignItems: 'center',
+		flexDirection: 'column'
+	},
 	logo         : {
 		alignItems : 'center',
 		marginTop  : 30
@@ -182,13 +186,15 @@ const styles = StyleSheet.create({
 		alignItems : 'center',
 		marginTop  : 40
 	},
+	cont: {
+		marginBottom    : '5%',
+		marginTop: '5%'
+	},
 	iconButtons  : {
-		backgroundColor : '#006A34',
-		marginBottom    : 10,
-		borderRadius    : 20,
-		marginTop       : 25,
-		width           : 15,
-		marginLeft      : 25
+		backgroundColor: '#097934',
+		marginBottom: 12,
+		borderRadius: 20,
+		marginTop: 25
 	},
 	heading      : {
 		marginBottom  : 10,

@@ -114,7 +114,7 @@ export default function Register({navigation}) {
   		 <Text style={styles.errorMsg}>Ingresa un e-mail valido</Text>
   		 </Animatable.View>
   		 }
-  		 <View style={styles.action}>
+  		 <View style={[styles.action, {marginBottom: 15}]}>
   		 <Feather
   		 name="lock"
   		 size={28}
@@ -126,9 +126,24 @@ export default function Register({navigation}) {
   		 autoCapitalize="none"
   		 onChangeText={(val) => handlePasswordChange(val)}
   		 style={styles.textInputs}
-		
+		right={data.secureTextEntry ?
+			<TextInput.Icon
+			name="eye-off"
+			color="grey"
+			size={20}
+			style={{marginTop:15}}
+			onPress={updateSecureTextEntry}
+			/>
+			:
+			<TextInput.Icon
+			name="eye"
+			color="grey"
+			size={20}
+			style={{marginTop:15}}
+			onPress={updateSecureTextEntry}
+			/>}
   		 />
-  		 <TouchableOpacity
+  		 {/* <TouchableOpacity
   		 onPress={updateSecureTextEntry}
   		 >
   		 {data.secureTextEntry ?
@@ -146,14 +161,10 @@ export default function Register({navigation}) {
   		 style={{marginTop:15}}
   		 />
   		 }
-  		 </TouchableOpacity>
+  		 </TouchableOpacity> */}
   		 </View>
 		</View>
-  		 { data.isValidPassword ? null :
-  		 <Animatable.View animation="fadeInLeft" duration={500}>
-  		 <Text style={styles.errorMsg}>Valores alfanuméricos 8 caracteres minimo</Text>
-  		 </Animatable.View>
-  		 }
+  		 
        <View style={{marginLeft:340,marginTop:-55}} >
        { data.isValidPassword && data.password !== "" &&
          <Animatable.View animation="bounceIn">
@@ -166,13 +177,22 @@ export default function Register({navigation}) {
          </Animatable.View>
        }
        </View>
-  		 <View style={styles.buttonCont}>
+  		 <View style={{display: 'flex', alignItems: 'center'}}>
+		   { data.isValidPassword ? null :
+		<View>
+  		 <Animatable.View animation="fadeInLeft" duration={500}>
+  		 <Text style={styles.errorMsg}>Valores alfanuméricos 8 caracteres minimo</Text>
+  		 </Animatable.View>
+		   </View>
+  		 }
+		<View style={styles.buttonCont}>
   		 <Button
   		 mode="contained"
   		 onPress={()=>{onSubmit(data)}}
   		 style={styles.button}>
        CONFIRMAR
   		 </Button>
+		   </View>
   		 </View>
   	</View>
   	);
@@ -227,11 +247,12 @@ button: {
 	  textInputs: {
 		height:48,
 		backgroundColor:"transparent",
+		width: '100%'
 	},
   	errorMsg: {
   			color: '#FF0000',
   			fontSize: 14,
-  			marginLeft:100
+  			//marginLeft:100
   	},
 
   });
