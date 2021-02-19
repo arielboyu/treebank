@@ -119,9 +119,8 @@ export default function SendCvu({ changeScreen, navigation, selected, updateSele
           onValueChange={setSelection}
           style={{marginRight: 4}}
         />
-        <Text>Acepto usar la sección amigos con fines personales {isSelected ? "👍" : "👎"}</Text>
+        <Text>Usar la sección con fines personales {isSelected ? "👍" : "👎"}</Text>
       </View>
-
       <View
         style={{
           marginTop: 60
