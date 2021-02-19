@@ -84,6 +84,7 @@ export default function Register({navigation}) {
   		<ImageBackground style={{ width: 140, height: 140 }}
   		source={require('../assets/LogoVector.png')} />
   		</View>
+		<View style={styles.inputCont}>
   		<View style={styles.action}>
   		<FontAwesome
   		 name="user-o"
@@ -95,12 +96,7 @@ export default function Register({navigation}) {
   		 autoCapitalize="none"
   		 onChangeText={(val) => textInputChange(val)}
   		 // onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
-  		 style={{
-  		 height:48,
-  		 paddingLeft:5,
-  		 width:210,
-		 backgroundColor:"transparent",
-  		 }}
+  		 style={styles.textInputs}
   		 />
   		 {data.check_textInputChange ?
   		 <Animatable.View animation="bounceIn">
@@ -129,12 +125,8 @@ export default function Register({navigation}) {
   		 secureTextEntry={data.secureTextEntry ? true : false}
   		 autoCapitalize="none"
   		 onChangeText={(val) => handlePasswordChange(val)}
-  		 style={{
-  		 height:48,
-  		 paddingLeft:5,
-  		 width:210,
-		 backgroundColor:"transparent",
-  		 }}
+  		 style={styles.textInputs}
+		
   		 />
   		 <TouchableOpacity
   		 onPress={updateSecureTextEntry}
@@ -156,6 +148,7 @@ export default function Register({navigation}) {
   		 }
   		 </TouchableOpacity>
   		 </View>
+		</View>
   		 { data.isValidPassword ? null :
   		 <Animatable.View animation="fadeInLeft" duration={500}>
   		 <Text style={styles.errorMsg}>Valores alfanuméricos 8 caracteres minimo</Text>
@@ -173,24 +166,14 @@ export default function Register({navigation}) {
          </Animatable.View>
        }
        </View>
-  		 <View
-  		 style={{marginTop:60
-  		 }}>
-  		 <Divider />
-  		 <Divider />
-  		 <View style={styles.botones}>
-  		 <View style={styles.boton}>
+  		 <View style={styles.buttonCont}>
   		 <Button
   		 mode="contained"
   		 onPress={()=>{onSubmit(data)}}
-  		 style={{
-  		 backgroundColor : '#006A34',
-  		 }}>
+  		 style={styles.button}>
        CONFIRMAR
   		 </Button>
   		 </View>
-  		 </View>
-  	 </View>
   	</View>
   	);
   };
@@ -202,11 +185,26 @@ export default function Register({navigation}) {
   	height:'100%',
 	  paddingTop: 30
   },
-  boton: {
-  	alignItems: 'center',
-  	marginTop:50,
-  	marginLeft:10
-  },
+
+  buttonCont: {
+	marginTop: '10%',
+	width: '100%',
+	display: 'flex',
+	alignItems: 'center'
+},
+inputCont: {
+	display: 'flex',
+	width: '100%',
+	alignItems: "center",
+	marginBottom: '10%',
+	marginTop: '10%'
+},
+button: {
+	borderRadius:9,
+	width: '50%',
+	backgroundColor : '#006A34',
+	marginBottom: '5%'
+},
   iconButtons: {
   	marginBottom: 10,
   	borderRadius: 20,
@@ -219,11 +217,17 @@ export default function Register({navigation}) {
   	marginTop:30
   },
   	action: {
-  			flexDirection:'row',
-  			marginTop:20,
-  			marginLeft:60,
-  			paddingBottom:5
+		width: '50%',
+		marginBottom: '5%',
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center'
   	},
+	  textInputs: {
+		height:48,
+		backgroundColor:"transparent",
+	},
   	errorMsg: {
   			color: '#FF0000',
   			fontSize: 14,

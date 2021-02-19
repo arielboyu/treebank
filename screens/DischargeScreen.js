@@ -149,157 +149,146 @@ export default function dischargeScreen({ navigation, user }) {
 
 	return (
 		<View style={styles.container}>
-		<ImageBackground
-			 style={{width:380,
-			 height: 380,
-			 opacity:0.9,
-			 marginTop:'40%'
-			 }}
-			 source=
-				{require('../assets/LogoVector.png')}>
-			<View style={styles.imagenview} />
-			<View style={styles.imageaction}>
-				<TouchableOpacity style={styles.button_image} onPress={openImgPictureAsync}>
-					<Image
-						source={{
-							uri : selectedImage !== null ? selectedImage.localUri : 'https://picsum.photos/200/200'
-						}}
-						style={styles.image}
-					/>
-				</TouchableOpacity>
-			</View>
-			<View style={{marginLeft:'1%'}} >
-			<Picker
-				style={{
-					color:'black',
-					width:60
+			<ImageBackground
+				style={{width:380,
+				height: 380,
+				opacity:0.9,
+				
 				}}
-				selectedValue={data.form.typeID}
-				onValueChange={(val) => handleChange({ value: val, type: 'typeID' })}>
-				<Picker.Item label="DNI" value="DNI" />
-				<Picker.Item label="PAS" value="PASAPORTE" />
-			</Picker>
-			</View>
-			<View style={styles.picker_tel}>
-				<Picker
-					selectedValue={data.form.prefix_code}
-					style={{
-						color:'black',
-						marginLeft:'4%',
-						marginTop:'25%',
-						width:60,
-					}}
-					onValueChange={(val) => handleChange({ value: val, type: 'prefix_code' })}>
-					<Picker.Item label="+54" value="+54" />
-					<Picker.Item label="+57" value="+57" />
-				</Picker>
-			</View>
-			<View style={styles.form}>
-				<View />
-				<View>
-					<View style={styles.nro}>
+				source=
+					{require('../assets/LogoVector.png')}
+			>
+				
+				<View style={styles.imageaction}>
+					<TouchableOpacity style={styles.button_image} onPress={openImgPictureAsync}>
+						<Image
+							source={{
+								uri : selectedImage !== null ? selectedImage.localUri : 'https://picsum.photos/200/200'
+							}}
+							style={styles.image}
+						/>
+					</TouchableOpacity>
+				</View>
+				<View style={{paddingLeft: '5%'}}>
+					<View>
+						<Picker
+							style={{
+								color:'black',
+								width:60
+							}}
+							selectedValue={data.form.typeID}
+							onValueChange={(val) => handleChange({ value: val, type: 'typeID' })}>
+							<Picker.Item label="DNI" value="DNI" />
+							<Picker.Item label="PAS" value="PASAPORTE" />
+						</Picker>
+						<Picker
+							selectedValue={data.form.prefix_code}
+							style={{
+								color:'black',
+								marginTop:'28%',
+								width:60,
+							}}
+							onValueChange={(val) => handleChange({ value: val, type: 'prefix_code' })}>
+							<Picker.Item label="+54" value="+54" />
+							<Picker.Item label="+57" value="+57" />
+						</Picker>
+					</View>
+					<View style={styles.form}>
+					<View />
+
+							<TextInput
+								style={{
+									height      : 45,
+									color       : 'black',
+									backgroundColor:'transparent'
+								}}
+								placeholder="Número "
+								placeholderTextColor="black"
+								keyboardType="decimal-pad"
+								onChangeText={(val) => handleChange({ value: val, type: 'document_number' })}
+							/>
 						<TextInput
 							style={{
 								height      : 45,
-								color       : 'white',
+								color       : 'black',
 								paddingLeft : 5,
 								marginTop   : 2,
-								width       : 200,
 								backgroundColor:'transparent'
 							}}
-							placeholder="Número "
+							placeholder="Nombres"
 							placeholderTextColor="black"
-							keyboardType="decimal-pad"
-							onChangeText={(val) => handleChange({ value: val, type: 'document_number' })}
+							autoCapitalize="none"
+							onChangeText={(val) => handleChange({ value: val, type: 'first_name' })}
 						/>
-
-					</View>
-				</View>
-				<View style={styles.nombres}>
-					<TextInput
-						style={{
-							height      : 45,
-							color       : 'black',
-							paddingLeft : 5,
-							marginTop   : 2,
-							backgroundColor:'transparent'
-						}}
-						placeholder="Nombres"
-						placeholderTextColor="black"
-						autoCapitalize="none"
-						onChangeText={(val) => handleChange({ value: val, type: 'first_name' })}
-					/>
-				</View>
-				<View style={styles.apellidos}>
-					<TextInput
-						placeholder="Apellidos"
-						placeholderTextColor="black"
-						style={{
-							height      : 45,
-							paddingLeft : 5,
-							backgroundColor:'transparent'
-						}}
-						autoCapitalize="none"
-						onChangeText={(val) => handleChange({ value: val, type: 'last_name' })}
-					/>
-				</View>
-				<View>
-					<View style={styles.telefono}>
 						<TextInput
-							placeholder="Télefono"
-							placeholderTextColor="black"
-							style={{
-								height:45,
-								paddingLeft:5,
-								backgroundColor:'transparent',
-							}}
-							keyboardType="decimal-pad"
-							onChangeText={(val) => handleChange({ value: val, type: 'phone_number' })}
-						/>
-					</View>
-				</View>
-				<View style={styles.fecha}>
-					{Platform.OS === 'web' ? (
-						<input
-							type="date"
-							style={{
-								height      : 45,
-								paddingLeft : 5,
-								marginTop   : 2,
-								fontSize    : 11
-							}}
-							onChange={onChangeDate}
-						/>
-					) : (
-						<TextInput
-							placeholder="Fec. Nac.(YYYY-MM-DD)"
+							placeholder="Apellidos"
 							placeholderTextColor="black"
 							style={{
 								height      : 45,
 								paddingLeft : 5,
-								marginTop   : 2,
 								backgroundColor:'transparent'
 							}}
 							autoCapitalize="none"
-							//onSubmitEditing={showDatePicker}
-							onFocus={showDatePicker}
-							value={data.form.birthday_date}
-							onChangeText={(val) => handleChange({ value: val, type: 'birthday_date' })}
+							onChangeText={(val) => handleChange({ value: val, type: 'last_name' })}
 						/>
-					)}
-					{/* <FontAwesome name="user-o" color="#05375a" size={20} /> */}
-					<View>
-						<DateTimePickerModal
-							isVisible={isDatePickerVisible}
-							mode="date"
-							onConfirm={handleConfirm}
-							onCancel={showDatePicker}
-						/>
-					</View>
+							<TextInput
+								placeholder="Télefono"
+								placeholderTextColor="black"
+								style={{
+									height:45,
+									paddingLeft:5,
+									backgroundColor:'transparent',
+								}}
+								keyboardType="decimal-pad"
+								onChangeText={(val) => handleChange({ value: val, type: 'phone_number' })}
+							/>
+						{Platform.OS === 'web' ? (
+							<input
+								type="date"
+								placeholder="Fecha de nacimiento"
+								style={{
+									height      : 45,
+									paddingLeft : 5,
+									marginTop   : 2,
+									fontSize    : 11,
+									width: 219,
+									backgroundColor: 'transparent',
+									borderWidth: 0,
+									borderBottomWidth: 1
+								}}
+								onChange={onChangeDate}
+							/>
+						) : (
+							<TextInput
+								placeholder="Fecha de nacimiento"
+								placeholderTextColor="black"
+								style={{
+									height      : 45,
+								paddingLeft : 5,
+								marginTop   : 2,
+								backgroundColor:'transparent',
+								
+								}}
+								autoCapitalize="none"
+								//onSubmitEditing={showDatePicker}
+								onFocus={showDatePicker}
+								value={data.form.birthday_date}
+								onChangeText={(val) => handleChange({ value: val, type: 'birthday_date' })}
+							/>
+						)}
+						{/* <FontAwesome name="user-o" color="#05375a" size={20} /> */}
+						<View>
+							<DateTimePickerModal
+								isVisible={isDatePickerVisible}
+								mode="date"
+								onConfirm={handleConfirm}
+								onCancel={showDatePicker}
+							/>
+						</View>
+					<Animatable.View animation="fadeInLeft">
+						<Text style={styles.errorMsg}>Para registrarte debes ser mayor a 16 años</Text>
+					</Animatable.View>
 				</View>
-				<Animatable.View animation="fadeInLeft">
-					<Text style={styles.errorMsg}>Recuerda Debes ser mayor a 16 años</Text>
-				</Animatable.View>
 			</View>
 			<View style={styles.logo}>
 				<FontAwesome
@@ -322,21 +311,28 @@ export default function dischargeScreen({ navigation, user }) {
 					GUARDAR
 				</Button>
 			</View>
+			
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
-	container    : {
+	container: {
 		flex            : 1,
-		backgroundColor : '#FFFF'
+		backgroundColor : '#FFFF',
+		alignItems:'center'
+	},
+	formCont: {
+		display: 'flex',
+		flexDirection: 'row',
+		marginTop: '10%',
+		marginLeft: '5%'
 	},
 
 	imageaction  : {
-		flexDirection : 'row',
-		width         : 120,
-		marginLeft:'35%',
-		marginTop:'-24%'
+		display:  'flex',
+		marginTop: '10%',
+		marginBottom: '10%'
 
 	},
 	logo: {
@@ -349,7 +345,9 @@ const styles = StyleSheet.create({
 		borderRadius : 100,
 		resizeMode   : 'contain'
 	},
-
+	pickers: {
+		
+	},
 	button_image : {
 		flex           : 1,
 		justifyContent : 'center',
@@ -361,9 +359,8 @@ const styles = StyleSheet.create({
 		marginTop:'2%'
 	},
 	guardar      : {
-		marginLeft        : 10,
-		paddingHorizontal : 120,
-		marginTop:'2%'
+		display:  'flex',
+		marginTop: '10%'
 	},
 
 	form         : {

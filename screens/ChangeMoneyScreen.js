@@ -108,7 +108,7 @@ export default function ChangeMoney ({changeScreen}) {
             </View>
         <View style={styles.logo}>
             <ImageBackground
-                style={{width:160,height:160}}
+                style={{width:140,height:140}}
                 source={require('../assets/LogoVector.png')}
             />
         </View>
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   	},
     logo: {
         alignItems:'center',
-        marginTop:30,
+        marginTop:'5%',
     },
     mainCont: {
         width: '100%',
